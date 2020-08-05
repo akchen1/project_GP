@@ -13,10 +13,19 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
 
     // Timer variable
-    float timer;
+    float fallTimer;
 
     // Get starting position of player for resetting
     Vector3 pos;
+
+    // Get bullet gameobject
+    public GameObject bullet;
+
+    // Variables to keep track of how fast the player can shoot
+    float shootTimer;
+    
+    // This variable is how fast the player can shoot (ie. if shootSpeed is set to 1, player can shoot once every 1 second)
+    float shootSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +33,11 @@ public class PlayerController : MonoBehaviour
         // Find Rigidbody and Collider
         rbody = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
-        timer = 5f;
 
+        // Assign starting values to variables
+        fallTimer = 5f;
+        shootTimer = 0f;
+        shootSpeed = 0.5f;
         pos = transform.position;
     }
 
@@ -44,12 +56,13 @@ public class PlayerController : MonoBehaviour
             // This checks if it collides with a block that is actually the finish line
             if (hit.collider.gameObject.tag == "Finish")
             {
-                // Restart
+                // If the player hits the finish line, reload the scene to generate a new level
+                // This line of code will be super useful later on, to move from the start menu, to switch levels, etc.
                 SceneManager.LoadScene("SampleScene");
             }
 
             // Reset timer
-            timer = 5f;
+            fallTimer = 5f;
             return true;
         }
 
@@ -88,16 +101,39 @@ public class PlayerController : MonoBehaviour
             rbody.velocity = new Vector2(rbody.velocity.x, 5);
         }
 
+        // Check if shoot timer is above 0, meaning the player can't shoot
+        if (shootTimer > 0f)
+        {
+            // Keep counting down
+            shootTimer -= Time.deltaTime;
+        }
+
+        // Set shoot timer to 0 for consistency, meaning player can shoot
+        else
+        {
+            shootTimer = 0f;
+        }
+
+        // Check if enter key is pressed
+        if (Input.GetKey("return") && shootTimer == 0f)
+        {
+            // Fire bullet
+            Instantiate(bullet, transform.position, Quaternion.identity);
+            shootTimer = shootSpeed;
+        }
+
         // If player is not on the ground, countdown from timer
         if (!IsGrounded())
         {
-            timer -= Time.deltaTime;
+            fallTimer -= Time.deltaTime;
         }
 
         // This checks if the player has been falling for over 5 seconds
         // I have a timer variable set to 5, that counts down every time it is not touching the ground
         // If it touches the ground, the timer resets back to 5 seconds
-        if (timer <= 0)
+        // This just moves the player back to the starting position
+        // It doesn't reset the level, so the player can keep trying the level over and over again
+        if (fallTimer <= 0)
         {
             // Reset player back to starting position
             transform.position = pos;
@@ -108,7 +144,7 @@ public class PlayerController : MonoBehaviour
             rbody.angularVelocity = 0;
 
             // Reset timer
-            timer = 5f;
+            fallTimer = 5f;
         }
     }
 }
