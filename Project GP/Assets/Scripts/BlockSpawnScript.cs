@@ -6,18 +6,31 @@ public class BlockSpawnScript : MonoBehaviour
 {
     // Block Prefab
     public GameObject block;
+    public GameObject bouncyBlock;
+    public GameObject movingBlock;
     public GameObject finish;
     GameObject prev;
     GameObject temp;
     public int numBlocks;
+    int randomBlock;
     float randomX;
     float randomY;
     Vector3 tempPos;
     Vector3 newBlockPos;
 
+    // Stuff for moving platform
+    MovingBlockScript mbScript;
+    float randomDist;
+    float randomSpeed;
+    float movingBlockEndPos;
+
     // Player
     public GameObject player;
     Vector3 playerpos;
+
+    // Spawning Enemies
+    int spawnChance;
+    public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -33,16 +46,65 @@ public class BlockSpawnScript : MonoBehaviour
         // This is probably not perfect though
         for(int i = 0; i < numBlocks; i++)
         {
+            // Get random x and y coordinates
             randomX = Random.Range(3f, 6f);
             randomY = Random.Range(-1.5f, 1.5f);
             tempPos = new Vector3(randomX, randomY, 0);
+            // TempPos here is actually a random distance used to calculate a new distance further from the previous platform
+            // Bad variable naming tbh but I'm too lazy to change it now
 
-            newBlockPos = prev.transform.position + tempPos;
+            // Calculate the new position of the block
+            newBlockPos = prev.transform.position + new Vector3(prev.GetComponent<BoxCollider2D>().size.x, 0, 0) + tempPos + new Vector3(randomDist, 0, 0);
 
-            temp = Instantiate(block, newBlockPos, Quaternion.identity);
-            temp.transform.localScale = new Vector3(Random.Range(0.1f, 2f), 1, 1);
+
+            // Get random block
+            randomBlock = Random.Range(1, 8);
+
+            // Spawn Bouncy Block
+            if (randomBlock == 1)
+            {
+                // Spawn new block
+                temp = Instantiate(bouncyBlock, newBlockPos, Quaternion.identity);
+
+                randomDist = 0;
+            }
+
+            // Spawn Moving Block
+            else if (randomBlock == 2)
+            {
+                temp = Instantiate(movingBlock, newBlockPos, Quaternion.identity);
+
+                // Access script of moving block
+                mbScript = temp.GetComponent<MovingBlockScript>();
+
+                // Get random speed and distance the moving block will travel
+                randomSpeed = Random.Range(2f, 4f);
+                randomDist = Random.Range(3f, 6f);
+
+                // Set values
+                mbScript.moveDistance = randomDist;
+                mbScript.moveSpeed = randomSpeed;
+            }
+
+            else
+            {
+                // Spawn new block
+                temp = Instantiate(block, newBlockPos, Quaternion.identity);
+
+                randomDist = 0;
+            }
+
+            // Set random size of block
+            temp.transform.localScale = new Vector3(Random.Range(0.3f, 2f), 1, 1);
             prev = temp;
             tempPos = prev.transform.position;
+
+            // 1 in 10 chance of spawning an enemy
+            spawnChance = Random.Range(1, 11);
+            if (spawnChance == 1)
+            {
+                Instantiate(enemy, tempPos + new Vector3(0, 2, 0), Quaternion.identity);
+            }
         }
 
         // Spawn in Finish

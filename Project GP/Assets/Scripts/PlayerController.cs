@@ -27,6 +27,14 @@ public class PlayerController : MonoBehaviour
     // This variable is how fast the player can shoot (ie. if shootSpeed is set to 1, player can shoot once every 1 second)
     float shootSpeed;
 
+    // Player stats
+    public int health;
+
+    // Get Animation
+    Animation anim;
+    float invincibleTimer;
+    bool takingDamage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +47,10 @@ public class PlayerController : MonoBehaviour
         shootTimer = 0f;
         shootSpeed = 0.5f;
         pos = transform.position;
+        health = 5;
+
+        anim = GetComponent<Animation>();
+        invincibleTimer = 0f;
     }
 
     // Function that checks if the player is on the ground
@@ -48,17 +60,23 @@ public class PlayerController : MonoBehaviour
         // I am only making the raycast go from the position of the player, down to the height of the player divided by 1.9f
         // This is so it checks if the ground is JUST underneath the player
         // I also use 1.9f because if I divide the height of the player by 2, the raycast will only go to the very edge of the player so that wouldn't work
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, coll.bounds.size.y / 1.9f, groundLayer);
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.8f, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.8f, groundLayer);
 
         // If it collides with something that isn't NULL
-        if (hit.collider != null)
+        if (leftHit.collider != null)
         {
             // This checks if it collides with a block that is actually the finish line
-            if (hit.collider.gameObject.tag == "Finish")
+            if (leftHit.collider.tag == "Finish")
             {
                 // If the player hits the finish line, reload the scene to generate a new level
                 // This line of code will be super useful later on, to move from the start menu, to switch levels, etc.
                 SceneManager.LoadScene("SampleScene");
+            }
+
+            if (leftHit.collider.tag == "MovingPlatform")
+            {
+                rbody.velocity += new Vector2(leftHit.collider.GetComponent<Rigidbody2D>().velocity.x, 0);
             }
 
             // Reset timer
@@ -66,12 +84,61 @@ public class PlayerController : MonoBehaviour
             return true;
         }
 
+        // If left side isn't, check right side
+        else if (rightHit.collider != null)
+        {
+            // This checks if it collides with a block that is actually the finish line
+            if (rightHit.collider.tag == "Finish")
+            {
+                // If the player hits the finish line, reload the scene to generate a new level
+                // This line of code will be super useful later on, to move from the start menu, to switch levels, etc.
+                SceneManager.LoadScene("SampleScene");
+            }
+
+            if (rightHit.collider.tag == "MovingPlatform")
+            {
+                rbody.velocity += new Vector2(rightHit.collider.GetComponent<Rigidbody2D>().velocity.x, 0);
+            }
+
+            // Reset timer
+            fallTimer = 5f;
+            return true;
+        }
         return false;
+    }
+
+    // Function for the player to take damage
+    public void Hit(int damage)
+    {
+        // This gives the player an invincibility window where they can't be hit again
+        // Currently the animation is 2.5 seconds long
+        // You can check it by looking at the animation in the inspector window
+        if (takingDamage == false)
+        {
+            // Take damage and play hit animation
+            health -= damage;
+            anim.Play();
+            takingDamage = true;
+            invincibleTimer = anim.clip.length;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Check if animation is currently playing so player is invincible
+        if (takingDamage == true)
+        {
+            invincibleTimer -= Time.deltaTime;
+        }
+
+        // If animation is not playing anymore
+        if (invincibleTimer <= 0)
+        {
+            takingDamage = false;
+        }
+
+
         // Checks if the "d" key is being pressed
         if (Input.GetKey("d"))
         {
@@ -98,7 +165,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("space") && IsGrounded())
         {
             // Retain current x-axis velocity, while adding a bit of y-axis velocity
-            rbody.velocity = new Vector2(rbody.velocity.x, 5);
+            rbody.velocity = new Vector2(rbody.velocity.x, 7);
         }
 
         // Check if shoot timer is above 0, meaning the player can't shoot
@@ -145,6 +212,27 @@ public class PlayerController : MonoBehaviour
 
             // Reset timer
             fallTimer = 5f;
+
+            // Reset health
+            health = 5;
+        }
+
+        // Check if player health is 0
+        if (health <= 0)
+        {
+            // Reset player back to starting position
+            transform.position = pos;
+
+            // Reset velocity and rotation
+            rbody.velocity = new Vector2(0, 0);
+            rbody.rotation = 0;
+            rbody.angularVelocity = 0;
+
+            // Reset timer
+            fallTimer = 5f;
+
+            // Reset health
+            health = 5;
         }
     }
 }

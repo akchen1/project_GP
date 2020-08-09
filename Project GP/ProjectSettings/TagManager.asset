@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bullet
   - Ground
+  - Enemy
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX

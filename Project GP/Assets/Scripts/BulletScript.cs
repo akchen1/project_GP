@@ -27,11 +27,24 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the tag of the object it collides with is "Ground"
-        if (collision.tag == "Ground")
+        if (collision.tag == "Ground" || collision.tag == "MovingPlatform")
         {
             // Destroy this specific instance of the bullet
             // Make sure to use this specific way of destroying instances of a prefab
             // If done incorrectly it could destroy the entire prefab, meaning the game wouldn't be able to spawn in any more bullets until the game restarts
+            Destroy(this.gameObject);
+        }
+
+        // Check if bullet hits enemy
+        else if (collision.tag == "Enemy")
+        {
+            // Access script of individual game object
+            EnemyScript enemyScript = collision.gameObject.GetComponent<EnemyScript>();
+
+            // Subtract health
+            enemyScript.health -= 1;
+
+            // Destroy this bullet
             Destroy(this.gameObject);
         }
     }
