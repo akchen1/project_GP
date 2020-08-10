@@ -7,14 +7,24 @@ public class BulletScript : MonoBehaviour
     // Rigidbody variable used to create constant horizontal movement
     Rigidbody2D rbody;
 
+    // Direction to shoot
+    Vector3 shootDirection;
+
+    // Speed of bullet
+    int bulletSpeed = 5;
+
     // Start is called before the first frame update
     void Start()
     {
         // Find rigidbody
         rbody = GetComponent<Rigidbody2D>();
 
-        // Apply velocity from the beginning
-        rbody.velocity = new Vector2(15, 0);
+        // Get direction
+        shootDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        shootDirection.z = 0;
+
+        // Set velocity to shoot bullet
+        rbody.velocity = shootDirection * bulletSpeed;
     }
 
     // Update is called once per frame

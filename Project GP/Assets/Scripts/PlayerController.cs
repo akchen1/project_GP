@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
         // I am only making the raycast go from the position of the player, down to the height of the player divided by 1.9f
         // This is so it checks if the ground is JUST underneath the player
         // I also use 1.9f because if I divide the height of the player by 2, the raycast will only go to the very edge of the player so that wouldn't work
-        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.8f, groundLayer);
-        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.8f, groundLayer);
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.75f, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.75f, groundLayer);
 
         // If it collides with something that isn't NULL
         if (leftHit.collider != null)
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Check if enter key is pressed
-        if (Input.GetKey("return") && shootTimer == 0f)
+        if (Input.GetMouseButtonDown(0) && shootTimer == 0f)
         {
             // Fire bullet
             Instantiate(bullet, transform.position, Quaternion.identity);
