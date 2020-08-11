@@ -144,6 +144,13 @@ public class PlayerController : MonoBehaviour
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
             rbody.velocity = new Vector2(5, rbody.velocity.y);
+
+            // Look Right
+            if (transform.localScale.x < 0)
+            {
+                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            }
+            
         }
 
         // Checks if the "a" key is being pressed
@@ -151,6 +158,12 @@ public class PlayerController : MonoBehaviour
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
             rbody.velocity = new Vector2(-5, rbody.velocity.y);
+
+            // Look Left
+            if (transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            }
         }
 
         // This else statement is to set the player's x-axis velocity to 0 if neither "a" nor "d" are being pressed.

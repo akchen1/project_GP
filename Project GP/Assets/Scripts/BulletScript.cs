@@ -33,7 +33,7 @@ public class BulletScript : MonoBehaviour
 
     }
 
-    // This is a built in unity function that checks when the object collides with another object, called collision
+    // This is a built in unity function that checks when the object collides with another object
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the tag of the object it collides with is "Ground"
