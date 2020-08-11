@@ -11,7 +11,7 @@ public class BulletScript : MonoBehaviour
     Vector3 shootDirection;
 
     // Speed of bullet
-    int bulletSpeed = 5;
+    int bulletSpeed = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class BulletScript : MonoBehaviour
         // Get direction
         shootDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         shootDirection.z = 0;
+        shootDirection.Normalize();
 
         // Set velocity to shoot bullet
         rbody.velocity = shootDirection * bulletSpeed;

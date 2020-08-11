@@ -1422,6 +1422,7 @@ MonoBehaviour:
     m_Bits: 256
   bullet: {fileID: 6456740284696563825, guid: 23f13e812a5af7947aa15e3de298077c, type: 3}
   health: 0
+  knockback: 0
 --- !u!50 &2012248442
 Rigidbody2D:
   serializedVersion: 4

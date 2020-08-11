@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     // Player stats
     public int health;
+    public float knockback;
+    Vector2 shootDirection;
 
     // Get Animation
     Animation anim;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
         shootSpeed = 0.5f;
         pos = transform.position;
         health = 5;
+        knockback = 3f;
 
         anim = GetComponent<Animation>();
         invincibleTimer = 0f;
@@ -60,8 +63,8 @@ public class PlayerController : MonoBehaviour
         // I am only making the raycast go from the position of the player, down to the height of the player divided by 1.9f
         // This is so it checks if the ground is JUST underneath the player
         // I also use 1.9f because if I divide the height of the player by 2, the raycast will only go to the very edge of the player so that wouldn't work
-        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.75f, groundLayer);
-        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.75f, groundLayer);
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.7f, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.7f, groundLayer);
 
         // If it collides with something that isn't NULL
         if (leftHit.collider != null)
@@ -172,6 +175,7 @@ public class PlayerController : MonoBehaviour
         {
             // Set player x-axis velocity to 0 while retaining y-axis velocity
             rbody.velocity = new Vector2(0, rbody.velocity.y);
+            
         }
 
         // Check if the space key is pressed AND that the player is on the ground
@@ -194,12 +198,17 @@ public class PlayerController : MonoBehaviour
             shootTimer = 0f;
         }
 
-        // Check if enter key is pressed
-        if (Input.GetMouseButtonDown(0) && shootTimer == 0f)
+        // Check if mouse key is pressed
+        if (Input.GetMouseButton(0) && shootTimer == 0f)
         {
             // Fire bullet
             Instantiate(bullet, transform.position, Quaternion.identity);
             shootTimer = shootSpeed;
+
+            // Knockback
+            shootDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            shootDirection.Normalize();
+            rbody.AddForce((-shootDirection * knockback), ForceMode2D.Force);
         }
 
         // If player is not on the ground, countdown from timer
