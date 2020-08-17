@@ -19,17 +19,11 @@ public class PlayerController : MonoBehaviour
     Vector3 pos;
 
     // Get bullet gameobject
-    public GameObject bullet;
-
-    // Variables to keep track of how fast the player can shoot
-    float shootTimer;
-    
-    // This variable is how fast the player can shoot (ie. if shootSpeed is set to 1, player can shoot once every 1 second)
-    float shootSpeed;
+    // public GameObject bullet;
+    public Weapon weapon;
 
     // Player stats
     public int health;
-    public float knockback;
     Vector2 shootDirection;
 
     // Get Animation
@@ -46,11 +40,8 @@ public class PlayerController : MonoBehaviour
 
         // Assign starting values to variables
         fallTimer = 5f;
-        shootTimer = 0f;
-        shootSpeed = 0.5f;
         pos = transform.position;
         health = 5;
-        knockback = 3f;
 
         anim = GetComponent<Animation>();
         invincibleTimer = 0f;
@@ -185,30 +176,25 @@ public class PlayerController : MonoBehaviour
             rbody.velocity = new Vector2(rbody.velocity.x, 7);
         }
 
-        // Check if shoot timer is above 0, meaning the player can't shoot
-        if (shootTimer > 0f)
-        {
-            // Keep counting down
-            shootTimer -= Time.deltaTime;
-        }
 
-        // Set shoot timer to 0 for consistency, meaning player can shoot
-        else
-        {
-            shootTimer = 0f;
-        }
 
         // Check if mouse key is pressed
-        if (Input.GetMouseButton(0) && shootTimer == 0f)
+        if (Input.GetMouseButton(0))
         {
             // Fire bullet
-            Instantiate(bullet, transform.position, Quaternion.identity);
-            shootTimer = shootSpeed;
+            if (weapon.Shoot())
+            {
+                // Knockback
+                shootDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                shootDirection.Normalize();
+                rbody.AddForce((-shootDirection * weapon.recoil), ForceMode2D.Force);
+            }
 
-            // Knockback
-            shootDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            shootDirection.Normalize();
-            rbody.AddForce((-shootDirection * knockback), ForceMode2D.Force);
+        }
+        // Check if weapon realod is pressed
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            weapon.Reload();
         }
 
         // If player is not on the ground, countdown from timer
