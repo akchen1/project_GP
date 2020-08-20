@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,6 +32,10 @@ public class PlayerController : MonoBehaviour
     float invincibleTimer;
     bool takingDamage;
 
+    // Check if touching interactable
+    public bool touchSign;
+    public bool touchDoor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
         anim = GetComponent<Animation>();
         invincibleTimer = 0f;
+
+        touchSign = false;
     }
 
     // Function that checks if the player is on the ground
@@ -71,6 +78,11 @@ public class PlayerController : MonoBehaviour
             if (leftHit.collider.tag == "MovingPlatform")
             {
                 rbody.velocity += new Vector2(leftHit.collider.GetComponent<Rigidbody2D>().velocity.x, 0);
+            }
+
+            if (leftHit.collider.tag == "Enemy")
+            {
+                Debug.Log("hit enemy");
             }
 
             // Reset timer
@@ -132,6 +144,24 @@ public class PlayerController : MonoBehaviour
             takingDamage = false;
         }
 
+        if (Input.GetKeyDown("f"))
+        {
+            // Check if touching a sign
+            if (touchSign)
+            {
+                // Do something here
+                GameObject sign = GameObject.FindGameObjectWithTag("IsTouching");
+                sign.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().SetText("This Is A Sign.");
+            }
+
+            else if (touchDoor)
+            {
+                GameObject originDoor = GameObject.FindGameObjectWithTag("IsTouching");
+                GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
+
+                transform.position = destDoor.transform.position;
+            }
+        }
 
         // Checks if the "d" key is being pressed
         if (Input.GetKey("d"))
