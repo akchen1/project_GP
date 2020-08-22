@@ -11,6 +11,8 @@ public class EnemyScript : MonoBehaviour
     // Enemy Stats
     public int health;
 
+    public int moneyValue;
+
     // LayerMask for the ground
     public LayerMask groundLayer;
 
@@ -23,6 +25,7 @@ public class EnemyScript : MonoBehaviour
 
         // Initialize stats
         health = 3;
+        moneyValue = 5;
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class EnemyScript : MonoBehaviour
         if (health <= 0)
         {
             // Kill enemy
+            GameObject.FindGameObjectWithTag("Currency").GetComponent<Currency>().updateGold(moneyValue);
             Destroy(this.gameObject);
         }
 
