@@ -31,6 +31,14 @@ public class PlayerController : MonoBehaviour
     float invincibleTimer;
     bool takingDamage;
 
+    bool isRoll;
+    float rollTimer; 
+
+    // temp animation for rolling
+    public Sprite rollSprite; 
+    public Sprite mainSprite; 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -175,6 +183,34 @@ public class PlayerController : MonoBehaviour
             // Retain current x-axis velocity, while adding a bit of y-axis velocity
             rbody.velocity = new Vector2(rbody.velocity.x, 7);
         }
+
+        // Check if the "s" key is pressed
+        // Can only roll if grounded
+        if (Input.GetKey("s") && isRoll == false){
+                // play the roll animation
+
+                // Player is invisible for the duration of the roll
+                rollTimer = 1.350f; 
+                invincibleTimer = 1.350f;
+                takingDamage = true;
+        }
+
+        // count down on roll timer and invisibility timer
+         if (rollTimer >= 0)
+        {
+            rollTimer -= Time.deltaTime;
+
+            // change sprite to something else
+            gameObject.GetComponent<SpriteRenderer>().sprite = rollSprite;
+        }
+
+        else{
+            isRoll = false;
+
+            //change sprite back to original
+            gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
+        }
+
 
 
 
