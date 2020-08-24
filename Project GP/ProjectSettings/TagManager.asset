@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - MovingPlatform
   - Weapon
+  - IsTouching
+  - TeleportDoor
+  - Currency
   layers:
   - Default
   - TransparentFX

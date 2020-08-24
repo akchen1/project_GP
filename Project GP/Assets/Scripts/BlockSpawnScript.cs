@@ -9,6 +9,8 @@ public class BlockSpawnScript : MonoBehaviour
     public GameObject bouncyBlock;
     public GameObject movingBlock;
     public GameObject finish;
+    public GameObject shop;
+    public GameObject shopDoor;
     GameObject prev;
     GameObject temp;
     public int numBlocks;
@@ -17,6 +19,9 @@ public class BlockSpawnScript : MonoBehaviour
     float randomY;
     Vector3 tempPos;
     Vector3 newBlockPos;
+
+    // Has a shop door yet
+    bool shopDoorSpawned;
 
     // Stuff for moving platform
     MovingBlockScript mbScript;
@@ -35,6 +40,11 @@ public class BlockSpawnScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        shopDoorSpawned = false;
+
+        // Spawn Shop somewhere far away
+        Instantiate(shop, new Vector3(1000, 1000, 0), Quaternion.identity);
+
         // Get player position
         playerpos = player.transform.position;
 
@@ -90,8 +100,16 @@ public class BlockSpawnScript : MonoBehaviour
             {
                 // Spawn new block
                 temp = Instantiate(block, newBlockPos, Quaternion.identity);
-
                 randomDist = 0;
+
+                // 1 in 4 chance of spawning an shop door if there hasn't been one already
+                spawnChance = Random.Range(1, 5);
+                if (spawnChance == 1 && !shopDoorSpawned)
+                {
+                    Instantiate(shopDoor, newBlockPos + new Vector3(0, 1.8f, 0), Quaternion.identity);
+                    shopDoorSpawned = true;
+                }
+
             }
 
             // Set random size of block
@@ -103,17 +121,11 @@ public class BlockSpawnScript : MonoBehaviour
             spawnChance = Random.Range(1, 11);
             if (spawnChance == 1)
             {
-                Instantiate(enemy, tempPos + new Vector3(0, 2, 0), Quaternion.identity);
+                Instantiate(enemy, tempPos + new Vector3(0, 1.5f, 0), Quaternion.identity);
             }
         }
 
         // Spawn in Finish
         Instantiate(finish, prev.transform.position + new Vector3(Random.Range(3f, 6f), Random.Range(-1.5f, 1.5f), 0), Quaternion.identity);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
