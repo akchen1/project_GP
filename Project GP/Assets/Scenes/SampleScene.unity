@@ -919,7 +919,6 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 4188a1b3cbec81c4d9e230dc2dfcb6e2, type: 3}
   touchSign: 0
   touchDoor: 0
-
 --- !u!111 &724695967
 Animation:
   m_ObjectHideFlags: 0

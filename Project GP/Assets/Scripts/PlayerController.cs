@@ -308,4 +308,13 @@ public class PlayerController : MonoBehaviour
             health = 5;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Collectible")
+        {
+            print("It hit the coin!!");
+            health++;
+            Destroy(collision.gameObject);
+        }
+    }
 }
