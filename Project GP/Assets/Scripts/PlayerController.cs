@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
     public bool touchSign;
     public bool touchDoor;
 
+    // Check if on ladder
+    bool onLadder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +62,7 @@ public class PlayerController : MonoBehaviour
         invincibleTimer = 0f;
 
         touchSign = false;
+        onLadder = false;
     }
 
     // Function that checks if the player is on the ground
@@ -67,7 +71,8 @@ public class PlayerController : MonoBehaviour
         // Create a raycast directly below the player
         // I am only making the raycast go from the position of the player, down to the height of the player divided by 1.9f
         // This is so it checks if the ground is JUST underneath the player
-        // I also use 1.9f because if I divide the height of the player by 2, the raycast will only go to the very edge of the player so that wouldn't work
+        // I also use 1.7f because if I divide the height of the player by 2, the raycast will only go to the very edge of the player so that wouldn't work
+        // THE 1.7f NUMBER IS TEMPORARY AND WILL MORE THAN LIKELY HAVE TO CHANGE BASED ON THE SPRITE WE USED FOR THE PLAYER AND THE PLATFORMS
         RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.7f, groundLayer);
         RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.7f, groundLayer);
 
@@ -85,11 +90,6 @@ public class PlayerController : MonoBehaviour
             if (leftHit.collider.tag == "MovingPlatform")
             {
                 rbody.velocity += new Vector2(leftHit.collider.GetComponent<Rigidbody2D>().velocity.x, 0);
-            }
-
-            if (leftHit.collider.tag == "Enemy")
-            {
-                Debug.Log("hit enemy");
             }
 
             // Reset timer
@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
 
             if (rightHit.collider.tag == "MovingPlatform")
             {
+                // If the player hits a moving platform, add the platform's velocity on to the player so they move together.
                 rbody.velocity += new Vector2(rightHit.collider.GetComponent<Rigidbody2D>().velocity.x, 0);
             }
 
@@ -215,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
         // Check if the "s" key is pressed
         // Can only roll if grounded
-        if (Input.GetKey("s") && isRoll == false){
+        if (Input.GetKey(KeyCode.LeftShift) && isRoll == false){
                 // play the roll animation
 
                 // Player is invisible for the duration of the roll
@@ -239,8 +240,18 @@ public class PlayerController : MonoBehaviour
             //change sprite back to original
             gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
         }
+        
+        // If on a ladder and press W, go up
+        if (Input.GetKey("w") && onLadder)
+        {
+            rbody.velocity = new Vector2(rbody.velocity.x, 3);
+        }
 
-
+        // If on a ladder and press S, go down
+        else if (Input.GetKey("s") && onLadder)
+        {
+            rbody.velocity = new Vector2(rbody.velocity.x, -3);
+        }
 
 
         // Check if mouse key is pressed
@@ -275,46 +286,63 @@ public class PlayerController : MonoBehaviour
         // It doesn't reset the level, so the player can keep trying the level over and over again
         if (fallTimer <= 0)
         {
-            // Reset player back to starting position
-            transform.position = pos;
-
-            // Reset velocity and rotation
-            rbody.velocity = new Vector2(0, 0);
-            rbody.rotation = 0;
-            rbody.angularVelocity = 0;
-
-            // Reset timer
-            fallTimer = 5f;
-
-            // Reset health
-            health = 5;
+            ResetPlayer();
         }
 
         // Check if player health is 0
         if (health <= 0)
         {
-            // Reset player back to starting position
-            transform.position = pos;
-
-            // Reset velocity and rotation
-            rbody.velocity = new Vector2(0, 0);
-            rbody.rotation = 0;
-            rbody.angularVelocity = 0;
-
-            // Reset timer
-            fallTimer = 5f;
-
-            // Reset health
-            health = 5;
+            ResetPlayer();
         }
     }
+
+    // Function that sets the player back at the beginning with everything reset
+    public void ResetPlayer()
+    {
+        // Reset player back to starting position
+        transform.position = pos;
+
+        // Reset velocity and rotation
+        rbody.velocity = new Vector2(0, 0);
+        rbody.rotation = 0;
+        rbody.angularVelocity = 0;
+
+        // Reset timer
+        fallTimer = 5f;
+
+        // Reset health
+        health = 5;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Collectible")
         {
-            print("It hit the coin!!");
             health++;
             Destroy(collision.gameObject);
+        }
+
+        else if (collision.tag == "Ladder")
+        {
+            onLadder = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Ladder")
+        {
+            onLadder = false;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Ladder")
+        {
+            // This makes it so the player can stay on the ladder without timing out due to not touching the ground
+            // However they will not be able to jump off the ladder
+            fallTimer = 5f;
         }
     }
 }
