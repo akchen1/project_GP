@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     // Check if touching interactable
     public bool touchSign;
     public bool touchDoor;
+    public bool touchSwitch;
 
     // Check if on ladder
     bool onLadder;
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
         invincibleTimer = 0f;
 
         touchSign = false;
+        touchSwitch = false;
         onLadder = false;
     }
 
@@ -162,12 +164,34 @@ public class PlayerController : MonoBehaviour
                 sign.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().SetText("This Is A Sign.");
             }
 
+            // Check if door is open
             else if (touchDoor)
             {
                 GameObject originDoor = GameObject.FindGameObjectWithTag("IsTouching");
-                GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
+                DoorScript doorScript = originDoor.GetComponent<DoorScript>();
 
-                transform.position = destDoor.transform.position;
+                if (doorScript.isOpen)
+                {
+                    GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
+                    transform.position = destDoor.transform.position;
+                }
+                
+            }
+
+            // Check if touching a switch
+            else if (touchSwitch)
+            {
+                SwitchScript switchScript = GameObject.FindGameObjectWithTag("IsTouching").GetComponent<SwitchScript>();
+
+                // Change status of switch
+                if (switchScript.isOn)
+                {
+                    switchScript.isOn = false;
+                }
+                else
+                {
+                    switchScript.isOn = true;
+                }
             }
         }
 
@@ -326,6 +350,7 @@ public class PlayerController : MonoBehaviour
         {
             onLadder = true;
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)

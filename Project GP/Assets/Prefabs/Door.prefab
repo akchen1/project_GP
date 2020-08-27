@@ -123,6 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560f309efd0e11445b5b4a46008613b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorClosed: {fileID: 21300000, guid: 3853c85b5e6b0fe498f20534644752b4, type: 3}
+  doorOpened: {fileID: 21300000, guid: 9f55ca8adf811cb4fa2ea9d213633038, type: 3}
+  switches: []
 --- !u!1 &8939969586818601625
 GameObject:
   m_ObjectHideFlags: 0
