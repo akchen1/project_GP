@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     // Check if touching interactable
     public bool touchSign;
     public bool touchDoor;
+    public bool touchSwitch;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
         invincibleTimer = 0f;
 
         touchSign = false;
+        touchSwitch = false;
         onLadder = false;
     }
 
@@ -130,15 +132,36 @@ public class PlayerController : MonoBehaviour
                 sign.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().SetText("This Is A Sign.");
             }
 
-            // If touching a door
+            // Check if door is open
+
             else if (touchDoor)
             {
                 // Determine which door is which
                 GameObject originDoor = GameObject.FindGameObjectWithTag("IsTouching");
-                GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
+                DoorScript doorScript = originDoor.GetComponent<DoorScript>();
 
-                // Teleport to the other door
-                transform.position = destDoor.transform.position;
+                if (doorScript.isOpen)
+                {
+                    GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
+                    transform.position = destDoor.transform.position;
+                }
+                
+            }
+
+            // Check if touching a switch
+            else if (touchSwitch)
+            {
+                SwitchScript switchScript = GameObject.FindGameObjectWithTag("IsTouching").GetComponent<SwitchScript>();
+
+                // Change status of switch
+                if (switchScript.isOn)
+                {
+                    switchScript.isOn = false;
+                }
+                else
+                {
+                    switchScript.isOn = true;
+                }
             }
         }
 
@@ -290,6 +313,7 @@ public class PlayerController : MonoBehaviour
         {
             onLadder = true;
         }
+
     }
 
     // Built in Unity function that checks if it exits from a trigger collider
