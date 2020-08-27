@@ -23,18 +23,24 @@ public class PlayerController : MonoBehaviour
     // public GameObject bullet;
     public Weapon weapon;
 
-    // Player stats
+    // Player stats and current states
     public int health;
     Vector2 shootDirection;
-
-    // Get Animation
-    Animation anim;
     float invincibleTimer;
     bool takingDamage;
-
     bool isRoll;
-    float rollTimer; 
+    float rollTimer;
+    bool onGround;
+    bool onMovingPlatform;
+    float mPVel;
 
+
+    // Check if on ladder
+    bool onLadder;
+
+    // Get Animation for taking damage
+    Animation anim;
+    
     // temp animation for rolling
     public Sprite rollSprite; 
     public Sprite mainSprite; 
@@ -43,9 +49,6 @@ public class PlayerController : MonoBehaviour
     public bool touchSign;
     public bool touchDoor;
     public bool touchSwitch;
-
-    // Check if on ladder
-    bool onLadder;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +61,9 @@ public class PlayerController : MonoBehaviour
         fallTimer = 5f;
         pos = transform.position;
         health = 5;
+        onGround = false;
+        onMovingPlatform = false;
+        mPVel = 0f;
 
         anim = GetComponent<Animation>();
         invincibleTimer = 0f;
@@ -65,62 +71,6 @@ public class PlayerController : MonoBehaviour
         touchSign = false;
         touchSwitch = false;
         onLadder = false;
-    }
-
-    // Function that checks if the player is on the ground
-    bool IsGrounded()
-    {
-        // Create a raycast directly below the player
-        // I am only making the raycast go from the position of the player, down to the height of the player divided by 1.9f
-        // This is so it checks if the ground is JUST underneath the player
-        // I also use 1.7f because if I divide the height of the player by 2, the raycast will only go to the very edge of the player so that wouldn't work
-        // THE 1.7f NUMBER IS TEMPORARY AND WILL MORE THAN LIKELY HAVE TO CHANGE BASED ON THE SPRITE WE USED FOR THE PLAYER AND THE PLATFORMS
-        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.7f, groundLayer);
-        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, 0, 0), Vector2.down, coll.bounds.size.y / 1.7f, groundLayer);
-
-        // If it collides with something that isn't NULL
-        if (leftHit.collider != null)
-        {
-            // This checks if it collides with a block that is actually the finish line
-            if (leftHit.collider.tag == "Finish")
-            {
-                // If the player hits the finish line, reload the scene to generate a new level
-                // This line of code will be super useful later on, to move from the start menu, to switch levels, etc.
-                SceneManager.LoadScene("SampleScene");
-            }
-
-            if (leftHit.collider.tag == "MovingPlatform")
-            {
-                rbody.velocity += new Vector2(leftHit.collider.GetComponent<Rigidbody2D>().velocity.x, 0);
-            }
-
-            // Reset timer
-            fallTimer = 5f;
-            return true;
-        }
-
-        // If left side isn't, check right side
-        else if (rightHit.collider != null)
-        {
-            // This checks if it collides with a block that is actually the finish line
-            if (rightHit.collider.tag == "Finish")
-            {
-                // If the player hits the finish line, reload the scene to generate a new level
-                // This line of code will be super useful later on, to move from the start menu, to switch levels, etc.
-                SceneManager.LoadScene("SampleScene");
-            }
-
-            if (rightHit.collider.tag == "MovingPlatform")
-            {
-                // If the player hits a moving platform, add the platform's velocity on to the player so they move together.
-                rbody.velocity += new Vector2(rightHit.collider.GetComponent<Rigidbody2D>().velocity.x, 0);
-            }
-
-            // Reset timer
-            fallTimer = 5f;
-            return true;
-        }
-        return false;
     }
 
     // Function for the player to take damage
@@ -154,6 +104,24 @@ public class PlayerController : MonoBehaviour
             takingDamage = false;
         }
 
+        // count down on roll timer and invisibility timer
+        if (rollTimer >= 0)
+        {
+            rollTimer -= Time.deltaTime;
+
+            // change sprite to something else
+            gameObject.GetComponent<SpriteRenderer>().sprite = rollSprite;
+        }
+
+        else
+        {
+            isRoll = false;
+
+            //change sprite back to original
+            gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
+        }
+
+        // Check if interaction key is being pressed
         if (Input.GetKeyDown("f"))
         {
             // Check if touching a sign
@@ -165,8 +133,10 @@ public class PlayerController : MonoBehaviour
             }
 
             // Check if door is open
+
             else if (touchDoor)
             {
+                // Determine which door is which
                 GameObject originDoor = GameObject.FindGameObjectWithTag("IsTouching");
                 DoorScript doorScript = originDoor.GetComponent<DoorScript>();
 
@@ -226,19 +196,26 @@ public class PlayerController : MonoBehaviour
         // Without this statement, the player would glide.
         else
         {
-            // Set player x-axis velocity to 0 while retaining y-axis velocity
-            rbody.velocity = new Vector2(0, rbody.velocity.y);
-            
+            if (!onMovingPlatform)
+            {
+                // Set player x-axis velocity to 0 while retaining y-axis velocity
+                rbody.velocity = new Vector2(0, rbody.velocity.y);
+            }
+            else
+            {
+                // Set player velocity to moving platform velocity
+                rbody.velocity = new Vector2(mPVel, rbody.velocity.y);
+            }
         }
 
         // Check if the space key is pressed AND that the player is on the ground
-        if (Input.GetKey("space") && IsGrounded())
+        if (Input.GetKey("space") && onGround)
         {
             // Retain current x-axis velocity, while adding a bit of y-axis velocity
             rbody.velocity = new Vector2(rbody.velocity.x, 7);
         }
 
-        // Check if the "s" key is pressed
+        // Check if the "shift" key is pressed
         // Can only roll if grounded
         if (Input.GetKey(KeyCode.LeftShift) && isRoll == false){
                 // play the roll animation
@@ -247,22 +224,6 @@ public class PlayerController : MonoBehaviour
                 rollTimer = 1.350f; 
                 invincibleTimer = 1.350f;
                 takingDamage = true;
-        }
-
-        // count down on roll timer and invisibility timer
-         if (rollTimer >= 0)
-        {
-            rollTimer -= Time.deltaTime;
-
-            // change sprite to something else
-            gameObject.GetComponent<SpriteRenderer>().sprite = rollSprite;
-        }
-
-        else{
-            isRoll = false;
-
-            //change sprite back to original
-            gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
         }
         
         // If on a ladder and press W, go up
@@ -276,7 +237,6 @@ public class PlayerController : MonoBehaviour
         {
             rbody.velocity = new Vector2(rbody.velocity.x, -3);
         }
-
 
         // Check if mouse key is pressed
         if (Input.GetMouseButton(0))
@@ -298,7 +258,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // If player is not on the ground, countdown from timer
-        if (!IsGrounded())
+        if (!onGround)
         {
             fallTimer -= Time.deltaTime;
         }
@@ -338,14 +298,17 @@ public class PlayerController : MonoBehaviour
         health = 5;
     }
 
+    // Built in Unity function that checks if it collides with a trigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // If hits collectible, pick it up
         if (collision.tag == "Collectible")
         {
             health++;
             Destroy(collision.gameObject);
         }
 
+        // Checks if the player is currently on a ladder
         else if (collision.tag == "Ladder")
         {
             onLadder = true;
@@ -353,21 +316,69 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // Built in Unity function that checks if it exits from a trigger collider
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // Leaving ladder
         if (collision.tag == "Ladder")
         {
             onLadder = false;
         }
     }
 
+    // Built in Unity function that checks while it is in a trigger collider
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // Still staying in ladder
         if (collision.tag == "Ladder")
         {
             // This makes it so the player can stay on the ladder without timing out due to not touching the ground
             // However they will not be able to jump off the ladder
             fallTimer = 5f;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Finish")
+        {
+            // If the player hits the finish line, reload the scene to generate a new level
+            // This line of code will be super useful later on, to move from the start menu, to switch levels, etc.
+            SceneManager.LoadScene("SampleScene");
+        }
+
+        else if (collision.gameObject.tag == "MovingPlatform")
+        {
+            // If they player hits a moving platform add velocity to move player along with platfomr
+            mPVel = collision.gameObject.GetComponent<Rigidbody2D>().velocity.x;
+            onMovingPlatform = true;
+        }
+
+        fallTimer = 5f;
+        onGround = true;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform"))
+        {
+            fallTimer = 5f;
+            onGround = true;
+
+            if (collision.gameObject.CompareTag("MovingPlatform"))
+            {
+                // If they player hits a moving platform add velocity to move player along with platform
+                // Update moving platform velocity constantly
+                mPVel = collision.gameObject.GetComponent<Rigidbody2D>().velocity.x;
+            }
+        }        
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform"))
+        {
+            onGround = false;
+            onMovingPlatform = false;
         }
     }
 }
