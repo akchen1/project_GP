@@ -12,9 +12,6 @@ TagManager:
   - IsTouching
   - TeleportDoor
   - Currency
-  - Collectible
-  - Ladder
-  - Switch
   layers:
   - Default
   - TransparentFX
