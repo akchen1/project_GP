@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
     public bool touchDoor;
     public bool touchSwitch;
 
+    private GameObject currentPassThroughBlock;
+    private float doubleTapDownTimer = 0.5f;
+    private int doubleTapDownCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -215,6 +219,29 @@ public class PlayerController : MonoBehaviour
             rbody.velocity = new Vector2(rbody.velocity.x, 7);
         }
 
+        isPassThroughBlock();
+        // Double tap down key to go down a pass through block
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (doubleTapDownTimer > 0 && doubleTapDownCount == 1 && currentPassThroughBlock != null/*Number of Taps you want Minus One*/)
+            {
+                currentPassThroughBlock.GetComponent<BoxCollider2D>().isTrigger = true;
+            }
+            else
+            {
+                doubleTapDownTimer = 0.5f;
+                doubleTapDownCount += 1;
+            }
+        }
+        if (doubleTapDownTimer > 0)
+        {
+            doubleTapDownTimer -= 1 * Time.deltaTime;
+        }
+        else
+        {
+            doubleTapDownCount = 0;
+        }
+
         // Check if the "shift" key is pressed
         // Can only roll if grounded
         if (Input.GetKey(KeyCode.LeftShift) && isRoll == false){
@@ -298,6 +325,49 @@ public class PlayerController : MonoBehaviour
         health = 5;
     }
 
+    public GameObject getCurrentPassThroughBlock()
+    {
+        return currentPassThroughBlock;
+    }
+
+    // Check if player is going to land on a pass through block
+    private bool isPassThroughBlock()
+    {
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, coll.bounds.size.y / 2, 0), Vector2.down, 1, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, -coll.bounds.size.y / 2, 0), Vector2.down, 1, groundLayer);
+        // If it collides with something that isn't NULL
+        if (leftHit.collider != null)
+        {
+            if (leftHit.collider.tag == "passThroughBlock")
+            {
+                currentPassThroughBlock = leftHit.collider.gameObject;
+            }
+            else
+            {
+                currentPassThroughBlock = null;
+            }
+            return true;
+        }
+        // If left side isn't, check right side
+        else if (rightHit.collider != null)
+        {
+            if (rightHit.collider.tag == "passThroughBlock")
+            {
+                currentPassThroughBlock = rightHit.collider.gameObject;
+            }
+            else
+            {
+                currentPassThroughBlock = null;
+            }
+            return true;
+        }
+        else
+        {
+            currentPassThroughBlock = null;
+        }
+        return false;
+    }
+
     // Built in Unity function that checks if it collides with a trigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -313,7 +383,6 @@ public class PlayerController : MonoBehaviour
         {
             onLadder = true;
         }
-
     }
 
     // Built in Unity function that checks if it exits from a trigger collider
@@ -352,6 +421,13 @@ public class PlayerController : MonoBehaviour
             // If they player hits a moving platform add velocity to move player along with platfomr
             mPVel = collision.gameObject.GetComponent<Rigidbody2D>().velocity.x;
             onMovingPlatform = true;
+        } else if (collision.gameObject.tag == "passThroughBlock")
+        {
+            currentPassThroughBlock = collision.gameObject;
+        }
+        else
+        {
+            currentPassThroughBlock = null;
         }
 
         fallTimer = 5f;
@@ -360,7 +436,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.tag == "passThroughBlock")
         {
             fallTimer = 5f;
             onGround = true;
@@ -371,14 +447,25 @@ public class PlayerController : MonoBehaviour
                 // Update moving platform velocity constantly
                 mPVel = collision.gameObject.GetComponent<Rigidbody2D>().velocity.x;
             }
+
+            else if (collision.gameObject.tag == "passThroughBlock")
+            {
+                currentPassThroughBlock = collision.gameObject;
+            }
+            else
+            {
+                currentPassThroughBlock = null;
+            }
         }        
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.tag == "passThroughBlock")
         {
             onGround = false;
             onMovingPlatform = false;
-        }
+            currentPassThroughBlock = null;
+        } 
+        
     }
 }
