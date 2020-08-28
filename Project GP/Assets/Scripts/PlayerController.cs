@@ -430,16 +430,23 @@ public class PlayerController : MonoBehaviour
             currentPassThroughBlock = null;
         }
 
-        fallTimer = 5f;
-        onGround = true;
+        if (transform.position.y >= collision.gameObject.transform.position.y)
+        {
+            fallTimer = 5f;
+            onGround = true;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.tag == "passThroughBlock")
         {
-            fallTimer = 5f;
-            onGround = true;
+            if (transform.position.y >= collision.gameObject.transform.position.y)
+            {
+                fallTimer = 5f;
+                onGround = true;
+            }
+            
 
             if (collision.gameObject.CompareTag("MovingPlatform"))
             {
