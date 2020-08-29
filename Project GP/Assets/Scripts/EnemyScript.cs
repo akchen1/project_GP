@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -8,10 +7,6 @@ public class EnemyScript : MonoBehaviour
     // Rigidbody and BoxCollider variables
     Rigidbody2D rbody;
     BoxCollider2D coll;
-
-    // Knockback power and knockback Duration
-    public float knockbackPower = 10;
-    public float knockbackDuration = 1;
 
     // Enemy Stats
     public int health;
@@ -62,13 +57,8 @@ public class EnemyScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            UnityEngine.Debug.Log("enemy hit");
-            // To activate knockback on PlayerController
-            StartCoroutine(PlayerController.instance.Knockback(knockbackDuration, knockbackPower, this.transform));
             PlayerController playerScript = collision.gameObject.GetComponent<PlayerController>();
             playerScript.Hit(1);
         }
     }
-
-
 }
