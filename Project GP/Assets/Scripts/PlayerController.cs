@@ -6,6 +6,10 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+
+    // So coroutine can be accessed by enemy script and knockback can occur
+    public static PlayerController instance;
+
     // Get access to the player's Rigidbody and Collider
     Rigidbody2D rbody;
     Collider2D coll;
@@ -42,6 +46,15 @@ public class PlayerController : MonoBehaviour
     // Check if touching interactable
     public bool touchSign;
     public bool touchDoor;
+
+    // is called when the object it placed in the scene
+    private void Awake()
+    {
+        // checking if there is already an instance for Player in the variable instance, if there isn't any
+        // then it assigns itself to instance.
+        instance = this;
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +149,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // To indicate that we are currently not being knockbacked
+    bool beingKnockback = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -151,97 +167,101 @@ public class PlayerController : MonoBehaviour
             takingDamage = false;
         }
 
-        if (Input.GetKeyDown("f"))
+        // If player is being knockbacked he can't perform actions during duration of
+        // knockback
+        if (!beingKnockback)
         {
-            // Check if touching a sign
-            if (touchSign)
+            if (Input.GetKeyDown("f"))
             {
-                // Do something here
-                GameObject sign = GameObject.FindGameObjectWithTag("IsTouching");
-                sign.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().SetText("This Is A Sign.");
+                // Check if touching a sign
+                if (touchSign)
+                {
+                    // Do something here
+                    GameObject sign = GameObject.FindGameObjectWithTag("IsTouching");
+                    sign.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().SetText("This Is A Sign.");
+                }
+
+                else if (touchDoor)
+                {
+                    GameObject originDoor = GameObject.FindGameObjectWithTag("IsTouching");
+                    GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
+
+                    transform.position = destDoor.transform.position;
+                }
             }
 
-            else if (touchDoor)
+            // Checks if the "d" key is being pressed
+            if (Input.GetKey("d"))
             {
-                GameObject originDoor = GameObject.FindGameObjectWithTag("IsTouching");
-                GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
+                // Changes the x-axis velocity of the player while retaining the y-axis velocity
+                rbody.velocity = new Vector2(5, rbody.velocity.y);
 
-                transform.position = destDoor.transform.position;
+                // Look Right
+                if (transform.localScale.x < 0)
+                {
+                    transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                }
+
             }
-        }
 
-        // Checks if the "d" key is being pressed
-        if (Input.GetKey("d"))
-        {
-            // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(5, rbody.velocity.y);
-
-            // Look Right
-            if (transform.localScale.x < 0)
+            // Checks if the "a" key is being pressed
+            else if (Input.GetKey("a"))
             {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                // Changes the x-axis velocity of the player while retaining the y-axis velocity
+                rbody.velocity = new Vector2(-5, rbody.velocity.y);
+
+                // Look Left
+                if (transform.localScale.x > 0)
+                {
+                    transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                }
             }
-            
-        }
 
-        // Checks if the "a" key is being pressed
-        else if (Input.GetKey("a"))
-        {
-            // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(-5, rbody.velocity.y);
-
-            // Look Left
-            if (transform.localScale.x > 0)
+            // This else statement is to set the player's x-axis velocity to 0 if neither "a" nor "d" are being pressed.
+            // Without this statement, the player would glide.
+            else
             {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                // Set player x-axis velocity to 0 while retaining y-axis velocity
+                rbody.velocity = new Vector2(0, rbody.velocity.y);
+
             }
-        }
 
-        // This else statement is to set the player's x-axis velocity to 0 if neither "a" nor "d" are being pressed.
-        // Without this statement, the player would glide.
-        else
-        {
-            // Set player x-axis velocity to 0 while retaining y-axis velocity
-            rbody.velocity = new Vector2(0, rbody.velocity.y);
-            
-        }
+            // Check if the space key is pressed AND that the player is on the ground
+            if (Input.GetKey("space") && IsGrounded())
+            {
+                // Retain current x-axis velocity, while adding a bit of y-axis velocity
+                rbody.velocity = new Vector2(rbody.velocity.x, 7);
+            }
 
-        // Check if the space key is pressed AND that the player is on the ground
-        if (Input.GetKey("space") && IsGrounded())
-        {
-            // Retain current x-axis velocity, while adding a bit of y-axis velocity
-            rbody.velocity = new Vector2(rbody.velocity.x, 7);
-        }
-
-        // Check if the "s" key is pressed
-        // Can only roll if grounded
-        if (Input.GetKey("s") && isRoll == false){
+            // Check if the "s" key is pressed
+            // Can only roll if grounded
+            if (Input.GetKey("s") && isRoll == false)
+            {
                 // play the roll animation
 
                 // Player is invisible for the duration of the roll
-                rollTimer = 1.350f; 
+                rollTimer = 1.350f;
                 invincibleTimer = 1.350f;
                 takingDamage = true;
+            }
+
+            // count down on roll timer and invisibility timer
+            if (rollTimer >= 0)
+            {
+                rollTimer -= Time.deltaTime;
+
+                // change sprite to something else
+                gameObject.GetComponent<SpriteRenderer>().sprite = rollSprite;
+            }
+
+            else
+            {
+                isRoll = false;
+
+                //change sprite back to original
+                gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
+            }
         }
-
-        // count down on roll timer and invisibility timer
-         if (rollTimer >= 0)
-        {
-            rollTimer -= Time.deltaTime;
-
-            // change sprite to something else
-            gameObject.GetComponent<SpriteRenderer>().sprite = rollSprite;
-        }
-
-        else{
-            isRoll = false;
-
-            //change sprite back to original
-            gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
-        }
-
-
-
 
         // Check if mouse key is pressed
         if (Input.GetMouseButton(0))
@@ -307,5 +327,23 @@ public class PlayerController : MonoBehaviour
             // Reset health
             health = 5;
         }
+    }
+
+    public IEnumerator Knockback(float knockbackDuration, float knockbackPower, Transform obj)
+    // Using coroutine allows for smarter ways of making it last a set amount of time
+    {
+        float knockbackTimer = 0;
+        beingKnockback = true;
+        while (knockbackTimer < knockbackDuration)
+        {
+            knockbackTimer += Time.deltaTime;
+            // direction is the direction where the player is coming from relative to the enemy
+            Vector2 direction = (obj.transform.position - this.transform.position).normalized;
+            // this makes the player go the opposite direction of direction multiplied by knockback power
+            rbody.velocity = -direction * knockbackPower;
+            yield return null; // yield for a frame
+        }
+        //initialize back to not being knockbacked
+        beingKnockback = false;
     }
 }
