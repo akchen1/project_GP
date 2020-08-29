@@ -200,12 +200,13 @@ public class PlayerController : MonoBehaviour
         // Without this statement, the player would glide.
         else
         {
-            if (!onMovingPlatform)
+            if (!onMovingPlatform && !isRoll)
             {
                 // Set player x-axis velocity to 0 while retaining y-axis velocity
                 rbody.velocity = new Vector2(0, rbody.velocity.y);
             }
-            else
+
+            else if (onMovingPlatform)
             {
                 // Set player velocity to moving platform velocity
                 rbody.velocity = new Vector2(mPVel, rbody.velocity.y);
@@ -248,9 +249,20 @@ public class PlayerController : MonoBehaviour
                 // play the roll animation
 
                 // Player is invisible for the duration of the roll
+                isRoll = true; 
                 rollTimer = 1.350f; 
                 invincibleTimer = 1.350f;
                 takingDamage = true;
+                
+                //direction of roll
+                // rolls right
+                if (transform.localScale.x > 0){
+                    rbody.velocity = new Vector2(5, rbody.velocity.y);
+                }
+                // rolls left
+                else if (transform.localScale.x < 0){
+                    rbody.velocity = new Vector2(-5, rbody.velocity.y);
+                }
         }
         
         // If on a ladder and press W, go up
