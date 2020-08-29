@@ -3,15 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Bullet
-  - Ground
-  - Enemy
-  - MovingPlatform
-  - Weapon
-  - IsTouching
-  - TeleportDoor
-  - Currency
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -21,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
-  - Finish
+  - 
+  - 
   - 
   - 
   - 
