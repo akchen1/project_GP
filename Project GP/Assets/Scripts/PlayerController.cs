@@ -284,6 +284,57 @@ public class PlayerController : MonoBehaviour
             weapon.Reload();
         }
 
+        // THE FOLLOWING 4 IF STATEMENTS ARE REALLY JUST FOR TESTING
+        // If press P, make elevator go to floor 2
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameObject elevator = GameObject.FindGameObjectWithTag("Elevator");
+            ElevatorScript eScript = elevator.GetComponent<ElevatorScript>();
+            eScript.GoToFloor(2);
+        }
+
+        // If Press O, make elevator go to floor 1
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            GameObject elevator = GameObject.FindGameObjectWithTag("Elevator");
+            ElevatorScript eScript = elevator.GetComponent<ElevatorScript>();
+            eScript.GoToFloor(1);
+        }
+
+        // If Press K, Open left door if closed, close if open
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameObject elevator = GameObject.FindGameObjectWithTag("Elevator");
+            ElevatorScript eScript = elevator.GetComponent<ElevatorScript>();
+
+            if (eScript.leftWall.activeSelf)
+            {
+                eScript.OpenDoor("Left");
+            }
+
+            else
+            {
+                eScript.CloseDoor("Left");
+            }
+        }
+
+        // If Press L, Open Right door if closed, close if open
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            GameObject elevator = GameObject.FindGameObjectWithTag("Elevator");
+            ElevatorScript eScript = elevator.GetComponent<ElevatorScript>();
+
+            if (eScript.rightWall.activeSelf)
+            {
+                eScript.OpenDoor("Right");
+            }
+
+            else
+            {
+                eScript.CloseDoor("Right");
+            }
+        }
+
         // If player is not on the ground, countdown from timer
         if (!onGround)
         {
