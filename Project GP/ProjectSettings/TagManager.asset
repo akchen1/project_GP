@@ -15,6 +15,7 @@ TagManager:
   - Collectible
   - Ladder
   - Switch
+  - Elevator
   layers:
   - Default
   - TransparentFX
