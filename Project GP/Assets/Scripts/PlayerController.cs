@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -200,12 +200,13 @@ public class PlayerController : MonoBehaviour
         // Without this statement, the player would glide.
         else
         {
-            if (!onMovingPlatform)
+            if (!onMovingPlatform && !isRoll)
             {
                 // Set player x-axis velocity to 0 while retaining y-axis velocity
                 rbody.velocity = new Vector2(0, rbody.velocity.y);
             }
-            else
+
+            else if (onMovingPlatform)
             {
                 // Set player velocity to moving platform velocity
                 rbody.velocity = new Vector2(mPVel, rbody.velocity.y);
@@ -248,9 +249,20 @@ public class PlayerController : MonoBehaviour
                 // play the roll animation
 
                 // Player is invisible for the duration of the roll
+                isRoll = true; 
                 rollTimer = 1.350f; 
                 invincibleTimer = 1.350f;
                 takingDamage = true;
+                
+                //direction of roll
+                // rolls right
+                if (transform.localScale.x > 0){
+                    rbody.velocity = new Vector2(5, rbody.velocity.y);
+                }
+                // rolls left
+                else if (transform.localScale.x < 0){
+                    rbody.velocity = new Vector2(-5, rbody.velocity.y);
+                }
         }
         
         // If on a ladder and press W, go up
@@ -282,57 +294,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             weapon.Reload();
-        }
-
-        // THE FOLLOWING 4 IF STATEMENTS ARE REALLY JUST FOR TESTING
-        // If press P, make elevator go to floor 2
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GameObject elevator = GameObject.FindGameObjectWithTag("Elevator");
-            ElevatorScript eScript = elevator.GetComponent<ElevatorScript>();
-            eScript.GoToFloor(2);
-        }
-
-        // If Press O, make elevator go to floor 1
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            GameObject elevator = GameObject.FindGameObjectWithTag("Elevator");
-            ElevatorScript eScript = elevator.GetComponent<ElevatorScript>();
-            eScript.GoToFloor(1);
-        }
-
-        // If Press K, Open left door if closed, close if open
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GameObject elevator = GameObject.FindGameObjectWithTag("Elevator");
-            ElevatorScript eScript = elevator.GetComponent<ElevatorScript>();
-
-            if (eScript.leftWall.activeSelf)
-            {
-                eScript.OpenDoor("Left");
-            }
-
-            else
-            {
-                eScript.CloseDoor("Left");
-            }
-        }
-
-        // If Press L, Open Right door if closed, close if open
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            GameObject elevator = GameObject.FindGameObjectWithTag("Elevator");
-            ElevatorScript eScript = elevator.GetComponent<ElevatorScript>();
-
-            if (eScript.rightWall.activeSelf)
-            {
-                eScript.OpenDoor("Right");
-            }
-
-            else
-            {
-                eScript.CloseDoor("Right");
-            }
         }
 
         // If player is not on the ground, countdown from timer
@@ -481,23 +442,16 @@ public class PlayerController : MonoBehaviour
             currentPassThroughBlock = null;
         }
 
-        if (transform.position.y >= collision.gameObject.transform.position.y)
-        {
-            fallTimer = 5f;
-            onGround = true;
-        }
+        fallTimer = 5f;
+        onGround = true;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.tag == "passThroughBlock")
         {
-            if (transform.position.y >= collision.gameObject.transform.position.y)
-            {
-                fallTimer = 5f;
-                onGround = true;
-            }
-            
+            fallTimer = 5f;
+            onGround = true;
 
             if (collision.gameObject.CompareTag("MovingPlatform"))
             {
