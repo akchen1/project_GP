@@ -16,6 +16,7 @@ TagManager:
   - Ladder
   - Switch
   - Elevator
+  - WallSwitch
   layers:
   - Default
   - TransparentFX

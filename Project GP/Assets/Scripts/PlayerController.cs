@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     public bool touchSign;
     public bool touchDoor;
     public bool touchSwitch;
+    public bool touchWallSwitch;
 
     private GameObject currentPassThroughBlock;
     private float doubleTapDownTimer = 0.5f;
@@ -167,13 +168,29 @@ public class PlayerController : MonoBehaviour
                     switchScript.isOn = true;
                 }
             }
+
+            // Check if touching wall switch
+            else if (touchWallSwitch)
+            {
+                WallSwitchScript wsScript = GameObject.FindGameObjectWithTag("IsTouching").GetComponent<WallSwitchScript>();
+                if (wsScript.state)
+                {
+                    wsScript.state = false;
+                    wsScript.OpenDoor();
+                }
+                else
+                {
+                    wsScript.state = true;
+                    wsScript.CloseDoor();
+                }
+            }
         }
 
         // Checks if the "d" key is being pressed
         if (Input.GetKey("d"))
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(5, rbody.velocity.y);
+            rbody.velocity = new Vector2(3, rbody.velocity.y);
 
             // Look Right
             if (transform.localScale.x < 0)
@@ -187,7 +204,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKey("a"))
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(-5, rbody.velocity.y);
+            rbody.velocity = new Vector2(-3, rbody.velocity.y);
 
             // Look Left
             if (transform.localScale.x > 0)
@@ -217,7 +234,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("space") && onGround)
         {
             // Retain current x-axis velocity, while adding a bit of y-axis velocity
-            rbody.velocity = new Vector2(rbody.velocity.x, 7);
+            rbody.velocity = new Vector2(rbody.velocity.x, 7f);
         }
 
         isPassThroughBlock();
@@ -442,16 +459,22 @@ public class PlayerController : MonoBehaviour
             currentPassThroughBlock = null;
         }
 
-        fallTimer = 5f;
-        onGround = true;
+        if (transform.position.y - (coll.bounds.size.y / 2) >= collision.gameObject.transform.position.y + (collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
+        {
+            fallTimer = 5f;
+            onGround = true;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.tag == "passThroughBlock")
         {
-            fallTimer = 5f;
-            onGround = true;
+            if (transform.position.y - (coll.bounds.size.y / 2) >= collision.gameObject.transform.position.y + (collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
+            {
+                fallTimer = 5f;
+                onGround = true;
+            }
 
             if (collision.gameObject.CompareTag("MovingPlatform"))
             {
