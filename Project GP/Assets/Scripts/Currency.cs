@@ -6,33 +6,43 @@ using TMPro;
 public class Currency : MonoBehaviour
 {
 
-    private int gold;
+    private int CR;
     TextMeshProUGUI tmpui;
     // Start is called before the first frame update
     void Start()
     {
+        
         tmpui = GetComponent<TextMeshProUGUI>();
-        gold = 0;
+        DeleteData(); // TEMP
+        CR = PlayerPrefs.GetInt("CR");
     }
 
     // Update is called once per frame
     void Update()
     {
-        tmpui.SetText("Gold: " + gold.ToString());
+        tmpui.SetText("CR: " + CR.ToString());
 
     }
 
     public bool updateGold(int amount)
     {
-        if (gold + amount < 0)
+        if (CR + amount < 0)
         {
             return false;
         }
         else
         {
-            gold += amount;
+            CR += amount;
+            PlayerPrefs.SetInt("CR", CR);
+            PlayerPrefs.Save();
             return true;
         }
+    }
+
+    public void DeleteData()
+    {
+        CR = 0;
+        updateGold(CR);
     }
 
 }

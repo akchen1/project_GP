@@ -1,40 +1,79 @@
 fileFormatVersion: 2
-guid: 0a44016d90f6dbb4d9c5747aa68feb9d
+guid: fcd0526d26371e4429b34dd3609007a2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1730475555588296138
-    second: edi-baseidle-Sheet_0
+      213: 6418437654383538042
+    second: edi-jumpdust-Sheet_0
   - first:
-      213: 127311072182208324
-    second: edi-baseidle-Sheet_1
+      213: 2186275307091902037
+    second: edi-jumpdust-Sheet_1
   - first:
-      213: 3212459045194098225
-    second: edi-baseidle-Sheet_2
+      213: 4617319300951508596
+    second: edi-jumpdust-Sheet_2
   - first:
-      213: -4256279991359439360
-    second: edi-baseidle-Sheet_3
+      213: 252053723240483905
+    second: edi-jumpdust-Sheet_3
   - first:
-      213: -8956030054887969349
-    second: edi-baseidle-Sheet_4
+      213: -9016851138025144579
+    second: edi-jumpdust-Sheet_4
   - first:
-      213: -4730630193097434173
-    second: edi-baseidle-Sheet_5
+      213: 6137035545077380441
+    second: edi-jumpdust-Sheet_5
   - first:
-      213: -3323172947135869577
-    second: edi-baseidle-Sheet_6
+      213: 8084786208105429076
+    second: edi-jumpdust-Sheet_6
   - first:
-      213: 167823491305179984
-    second: edi-baseidle-Sheet_7
+      213: -4757246024606523781
+    second: edi-jumpdust-Sheet_7
   - first:
-      213: 8681806481052929375
-    second: edi-baseidle-Sheet_8
+      213: 7982424991872385983
+    second: edi-jumpdust-Sheet_8
   - first:
-      213: -1342840433182109516
-    second: edi-baseidle-Sheet_9
+      213: 4300887041245937244
+    second: edi-jumpdust-Sheet_9
   - first:
-      213: -5208327228282365999
-    second: edi-baseidle-Sheet_10
+      213: 3125005286251866464
+    second: edi-jumpdust-Sheet_10
+  - first:
+      213: -82645394423622140
+    second: edi-jumpdust-Sheet_11
+  - first:
+      213: 2370060439195093264
+    second: edi-jumpdust-Sheet_12
+  - first:
+      213: 6952230679250771572
+    second: edi-jumpdust-Sheet_13
+  - first:
+      213: -6085419868149368658
+    second: edi-jumpdust-Sheet_14
+  - first:
+      213: 9167167121101433652
+    second: edi-jumpdust-Sheet_15
+  - first:
+      213: 3675526444839734304
+    second: edi-jumpdust-Sheet_16
+  - first:
+      213: -6453092200668697897
+    second: edi-jumpdust-Sheet_17
+  - first:
+      213: -7400866533573085463
+    second: edi-jumpdust-Sheet_18
+  - first:
+      213: -1809427591724304275
+    second: edi-jumpdust-Sheet_19
+  - first:
+      213: 2426514175531479169
+    second: edi-jumpdust-Sheet_20
+  - first:
+      213: -4116879690686119297
+    second: edi-jumpdust-Sheet_21
+  - first:
+      213: 1807114447055139540
+    second: edi-jumpdust-Sheet_22
+  - first:
+      213: 1576187153588988635
+    second: edi-jumpdust-Sheet_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -131,18 +170,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: tvOS
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -179,6 +206,18 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -194,232 +233,295 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_0
+      name: edi-jumpdust-Sheet_0
       rect:
         serializedVersion: 2
-        x: 24
+        x: 46
         y: 0
-        width: 84
-        height: 192
+        width: 75
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 632b9a096ad1cf7e0800000000000000
-      internalID: -1730475555588296138
+      spriteID: a7fa5825a0fd21950800000000000000
+      internalID: 6418437654383538042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_1
+      name: edi-jumpdust-Sheet_1
       rect:
         serializedVersion: 2
-        x: 186
+        x: 256
         y: 0
-        width: 84
-        height: 192
+        width: 81
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4470561eebc44c100800000000000000
-      internalID: 127311072182208324
+      spriteID: 55ebb64fec5375e10800000000000000
+      internalID: 2186275307091902037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_2
+      name: edi-jumpdust-Sheet_2
       rect:
         serializedVersion: 2
-        x: 348
+        x: 467
         y: 0
-        width: 84
-        height: 192
+        width: 81
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 136e8443b72f49c20800000000000000
-      internalID: 3212459045194098225
+      spriteID: 47605cbc073041040800000000000000
+      internalID: 4617319300951508596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_3
+      name: edi-jumpdust-Sheet_3
       rect:
         serializedVersion: 2
-        x: 510
+        x: 676
         y: 0
-        width: 84
-        height: 192
+        width: 82
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00efa6a06e7aee4c0800000000000000
-      internalID: -4256279991359439360
+      spriteID: 14c401e96897f7300800000000000000
+      internalID: 252053723240483905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_4
+      name: edi-jumpdust-Sheet_4
       rect:
         serializedVersion: 2
-        x: 672
+        x: 886
         y: 0
-        width: 84
-        height: 192
+        width: 82
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbd2eacbd1ac5b380800000000000000
-      internalID: -8956030054887969349
+      spriteID: dfe3f6dc9a5bdd280800000000000000
+      internalID: -9016851138025144579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_5
+      name: edi-jumpdust-Sheet_6
       rect:
         serializedVersion: 2
-        x: 834
+        x: 1096
         y: 0
-        width: 84
-        height: 192
+        width: 78
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cb90b047ec695eb0800000000000000
-      internalID: -4730630193097434173
+      spriteID: 458f913a83ee23070800000000000000
+      internalID: 8084786208105429076
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_6
+      name: edi-jumpdust-Sheet_8
       rect:
         serializedVersion: 2
-        x: 996
+        x: 1307
         y: 0
-        width: 84
-        height: 192
+        width: 80
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77d47cebfc7b1e1d0800000000000000
-      internalID: -3323172947135869577
+      spriteID: fb301c6cc3547ce60800000000000000
+      internalID: 7982424991872385983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_7
+      name: edi-jumpdust-Sheet_9
       rect:
         serializedVersion: 2
-        x: 1158
+        x: 1517
         y: 0
-        width: 84
-        height: 192
+        width: 86
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05b0630839a345200800000000000000
-      internalID: 167823491305179984
+      spriteID: c5e7b881af1dfab30800000000000000
+      internalID: 4300887041245937244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_8
+      name: edi-jumpdust-Sheet_10
       rect:
         serializedVersion: 2
-        x: 1320
+        x: 1726
         y: 0
-        width: 84
-        height: 192
+        width: 88
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5d08df0ff8fb7870800000000000000
-      internalID: 8681806481052929375
+      spriteID: 069a24830cf3e5b20800000000000000
+      internalID: 3125005286251866464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_9
+      name: edi-jumpdust-Sheet_11
       rect:
         serializedVersion: 2
-        x: 1482
+        x: 1902
         y: 0
-        width: 84
-        height: 192
+        width: 144
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b0162e9db54d5de0800000000000000
-      internalID: -1342840433182109516
+      spriteID: 406de0f93726adef0800000000000000
+      internalID: -82645394423622140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_10
+      name: edi-jumpdust-Sheet_12
       rect:
         serializedVersion: 2
-        x: 1644
+        x: 2104
         y: 0
-        width: 84
-        height: 192
+        width: 165
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d71c341bfd48b7b0800000000000000
-      internalID: -5208327228282365999
+      spriteID: 0190e6e896524e020800000000000000
+      internalID: 2370060439195093264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-jumpdust-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 0
+        width: 170
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e9051e7f84b7060800000000000000
+      internalID: 6952230679250771572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-jumpdust-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 2526
+        y: 0
+        width: 122
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea83ad13fde3c8ba0800000000000000
+      internalID: -6085419868149368658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-jumpdust-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 2776
+        y: 0
+        width: 76
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b24e94de1583f70800000000000000
+      internalID: 9167167121101433652
       vertices: []
       indices: 
       edges: []

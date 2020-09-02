@@ -1,40 +1,31 @@
 fileFormatVersion: 2
-guid: 0a44016d90f6dbb4d9c5747aa68feb9d
+guid: 0d8ed94959a3a9d48803ce4348543fb7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1730475555588296138
-    second: edi-baseidle-Sheet_0
+      213: -7142028720959547369
+    second: edi-run-Sheet_0
   - first:
-      213: 127311072182208324
-    second: edi-baseidle-Sheet_1
+      213: 336114054563019133
+    second: edi-run-Sheet_1
   - first:
-      213: 3212459045194098225
-    second: edi-baseidle-Sheet_2
+      213: -3740516361604576059
+    second: edi-run-Sheet_2
   - first:
-      213: -4256279991359439360
-    second: edi-baseidle-Sheet_3
+      213: -4626412540775446600
+    second: edi-run-Sheet_3
   - first:
-      213: -8956030054887969349
-    second: edi-baseidle-Sheet_4
+      213: -1232420016402752968
+    second: edi-run-Sheet_4
   - first:
-      213: -4730630193097434173
-    second: edi-baseidle-Sheet_5
+      213: 6127289796039021091
+    second: edi-run-Sheet_5
   - first:
-      213: -3323172947135869577
-    second: edi-baseidle-Sheet_6
+      213: 4726716592860931191
+    second: edi-run-Sheet_6
   - first:
-      213: 167823491305179984
-    second: edi-baseidle-Sheet_7
-  - first:
-      213: 8681806481052929375
-    second: edi-baseidle-Sheet_8
-  - first:
-      213: -1342840433182109516
-    second: edi-baseidle-Sheet_9
-  - first:
-      213: -5208327228282365999
-    second: edi-baseidle-Sheet_10
+      213: -8102284312061371854
+    second: edi-run-Sheet_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -131,18 +122,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: tvOS
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -179,6 +158,18 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -194,13 +185,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_0
+      name: edi-run-Sheet_0
       rect:
         serializedVersion: 2
-        x: 24
-        y: 0
-        width: 84
-        height: 192
+        x: 48
+        y: 6
+        width: 102
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +199,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 632b9a096ad1cf7e0800000000000000
-      internalID: -1730475555588296138
+      spriteID: 7189197e7ba62ec90800000000000000
+      internalID: -7142028720959547369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_1
+      name: edi-run-Sheet_1
       rect:
         serializedVersion: 2
-        x: 186
+        x: 276
         y: 0
-        width: 84
-        height: 192
+        width: 102
+        height: 174
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,41 +220,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4470561eebc44c100800000000000000
-      internalID: 127311072182208324
+      spriteID: d79be3aa3fd1aa400800000000000000
+      internalID: 336114054563019133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 348
-        y: 0
-        width: 84
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 136e8443b72f49c20800000000000000
-      internalID: 3212459045194098225
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: edi-baseidle-Sheet_3
+      name: edi-run-Sheet_2
       rect:
         serializedVersion: 2
         x: 510
         y: 0
-        width: 84
-        height: 192
+        width: 90
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +241,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00efa6a06e7aee4c0800000000000000
-      internalID: -4256279991359439360
+      spriteID: 5ccc50eef24071cc0800000000000000
+      internalID: -3740516361604576059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_4
+      name: edi-run-Sheet_3
       rect:
         serializedVersion: 2
-        x: 672
+        x: 732
         y: 0
-        width: 84
-        height: 192
+        width: 96
+        height: 198
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,20 +262,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbd2eacbd1ac5b380800000000000000
-      internalID: -8956030054887969349
+      spriteID: 8b7caa25e4eabcfb0800000000000000
+      internalID: -4626412540775446600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_5
+      name: edi-run-Sheet_4
       rect:
         serializedVersion: 2
-        x: 834
-        y: 0
-        width: 84
-        height: 192
+        x: 954
+        y: 18
+        width: 102
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,20 +283,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cb90b047ec695eb0800000000000000
-      internalID: -4730630193097434173
+      spriteID: 83a9b34568095eee0800000000000000
+      internalID: -1232420016402752968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_6
+      name: edi-run-Sheet_5
       rect:
         serializedVersion: 2
-        x: 996
+        x: 1182
         y: 0
-        width: 84
-        height: 192
+        width: 114
+        height: 174
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,20 +304,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77d47cebfc7b1e1d0800000000000000
-      internalID: -3323172947135869577
+      spriteID: 32218c01b91880550800000000000000
+      internalID: 6127289796039021091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_7
+      name: edi-run-Sheet_6
       rect:
         serializedVersion: 2
-        x: 1158
+        x: 1422
         y: 0
-        width: 84
-        height: 192
+        width: 96
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,20 +325,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05b0630839a345200800000000000000
-      internalID: 167823491305179984
+      spriteID: 774ab6fa2bba89140800000000000000
+      internalID: 4726716592860931191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edi-baseidle-Sheet_8
+      name: edi-run-Sheet_7
       rect:
         serializedVersion: 2
-        x: 1320
+        x: 1650
         y: 0
-        width: 84
-        height: 192
+        width: 96
+        height: 198
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,50 +346,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5d08df0ff8fb7870800000000000000
-      internalID: 8681806481052929375
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: edi-baseidle-Sheet_9
-      rect:
-        serializedVersion: 2
-        x: 1482
-        y: 0
-        width: 84
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b0162e9db54d5de0800000000000000
-      internalID: -1342840433182109516
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: edi-baseidle-Sheet_10
-      rect:
-        serializedVersion: 2
-        x: 1644
-        y: 0
-        width: 84
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d71c341bfd48b7b0800000000000000
-      internalID: -5208327228282365999
+      spriteID: 23a9c5e8857ee8f80800000000000000
+      internalID: -8102284312061371854
       vertices: []
       indices: 
       edges: []

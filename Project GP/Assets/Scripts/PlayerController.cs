@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     // Get Animation for taking damage
     Animation anim;
+    Animator animator;
     
     // temp animation for rolling
     public Sprite rollSprite; 
@@ -53,6 +54,9 @@ public class PlayerController : MonoBehaviour
     private GameObject currentPassThroughBlock;
     private float doubleTapDownTimer = 0.5f;
     private int doubleTapDownCount = 0;
+
+    // animation stuff
+    private bool isFacingRight;
 
     // Start is called before the first frame update
     void Start()
@@ -70,11 +74,14 @@ public class PlayerController : MonoBehaviour
         mPVel = 0f;
 
         anim = GetComponent<Animation>();
+        animator = gameObject.GetComponent<Animator>();
         invincibleTimer = 0f;
 
         touchSign = false;
         touchSwitch = false;
         onLadder = false;
+
+        isFacingRight = true;
     }
 
     // Function for the player to take damage
@@ -317,6 +324,8 @@ public class PlayerController : MonoBehaviour
         {
             ResetPlayer();
         }
+
+        animationStates();
     }
 
     // Function that sets the player back at the beginning with everything reset
@@ -335,6 +344,48 @@ public class PlayerController : MonoBehaviour
 
         // Reset health
         health = 5;
+    }
+
+    private void animationStates()
+    {
+        if (weapon != null)
+        {
+            animator.SetBool("hasGun", true);
+        }
+        else
+        {
+            animator.SetBool("hasGun", false);
+        }
+        if (rbody.velocity.x < 0)
+        {
+            animator.SetBool("isRunning", true);
+            if (isFacingRight)
+            {
+                flip();
+            }
+
+        } else if (rbody.velocity.x > 0)
+        {
+            animator.SetBool("isRunning", true);
+            if (!isFacingRight)
+            {
+                flip();
+            }
+        } else
+        {
+            animator.SetBool("isRunning", false);
+        }
+    }
+
+    private void flip()
+    {
+        
+        isFacingRight = !isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+
+
     }
 
     public GameObject getCurrentPassThroughBlock()
