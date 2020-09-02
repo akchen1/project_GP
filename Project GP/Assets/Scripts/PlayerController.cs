@@ -202,7 +202,6 @@ public class PlayerController : MonoBehaviour
                 if (psScript.state)
                 {
                     psScript.state = false;
-                    psScript.Puzzle();
                 }
                 else
                 {

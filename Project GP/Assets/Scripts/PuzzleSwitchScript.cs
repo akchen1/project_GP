@@ -6,8 +6,8 @@ public class PuzzleSwitchScript : MonoBehaviour
 {
     // True = On, False = Off
     public bool state;
-
     public GameObject wall;
+    public GameObject puzzleUI;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,17 @@ public class PuzzleSwitchScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (state)
+        {
+            Time.timeScale = 0;
+            puzzleUI.SetActive(true);
+        }
 
+        else
+        {
+            Time.timeScale = 1;
+            puzzleUI.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,11 +48,6 @@ public class PuzzleSwitchScript : MonoBehaviour
             pScript.touchPuzzleSwitch = false;
             this.tag = "PuzzleSwitch";
         }
-    }
-
-    public void Puzzle()
-    {
-
     }
 
     public void OpenDoor()
