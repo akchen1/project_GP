@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     bool onGround;
     bool onMovingPlatform;
     float mPVel;
+    float rollDelay;
 
 
     // Check if on ladder
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public bool touchSign;
     public bool touchDoor;
     public bool touchSwitch;
+    public bool touchWallSwitch;
+    public bool touchPuzzleSwitch;
 
     private GameObject currentPassThroughBlock;
     private float doubleTapDownTimer = 0.5f;
@@ -76,9 +79,12 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animation>();
         animator = gameObject.GetComponent<Animator>();
         invincibleTimer = 0f;
+        rollDelay = 0f;
 
         touchSign = false;
         touchSwitch = false;
+        touchWallSwitch = false;
+        touchPuzzleSwitch = false;
         onLadder = false;
 
         isFacingRight = true;
@@ -113,6 +119,12 @@ public class PlayerController : MonoBehaviour
         if (invincibleTimer <= 0)
         {
             takingDamage = false;
+        }
+
+        // Delay on rolling so you can't keep rolling
+        if (rollDelay > 0)
+        {
+            rollDelay -= Time.deltaTime;
         }
 
         // count down on roll timer and invisibility timer
@@ -174,13 +186,42 @@ public class PlayerController : MonoBehaviour
                     switchScript.isOn = true;
                 }
             }
+
+            // Check if touching wall switch
+            else if (touchWallSwitch)
+            {
+                WallSwitchScript wsScript = GameObject.FindGameObjectWithTag("IsTouching").GetComponent<WallSwitchScript>();
+                if (wsScript.state)
+                {
+                    wsScript.state = false;
+                    wsScript.OpenDoor();
+                }
+                else
+                {
+                    wsScript.state = true;
+                    wsScript.CloseDoor();
+                }
+            }
+
+            else if (touchPuzzleSwitch)
+            {
+                PuzzleSwitchScript psScript = GameObject.FindGameObjectWithTag("IsTouching").GetComponent<PuzzleSwitchScript>();
+                if (psScript.state)
+                {
+                    psScript.state = false;
+                }
+                else
+                {
+                    psScript.state = true;
+                }
+            }
         }
 
         // Checks if the "d" key is being pressed
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") && !isRoll)
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(5, rbody.velocity.y);
+            rbody.velocity = new Vector2(3, rbody.velocity.y);
 
             // Look Right
             if (transform.localScale.x < 0)
@@ -191,10 +232,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Checks if the "a" key is being pressed
-        else if (Input.GetKey("a"))
+        else if (Input.GetKey("a") && !isRoll)
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(-5, rbody.velocity.y);
+            rbody.velocity = new Vector2(-3, rbody.velocity.y);
 
             // Look Left
             if (transform.localScale.x > 0)
@@ -224,7 +265,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("space") && onGround)
         {
             // Retain current x-axis velocity, while adding a bit of y-axis velocity
-            rbody.velocity = new Vector2(rbody.velocity.x, 7);
+            rbody.velocity = new Vector2(rbody.velocity.x, 7f);
         }
 
         isPassThroughBlock();
@@ -252,24 +293,26 @@ public class PlayerController : MonoBehaviour
 
         // Check if the "shift" key is pressed
         // Can only roll if grounded
-        if (Input.GetKey(KeyCode.LeftShift) && isRoll == false){
-                // play the roll animation
+        if (Input.GetKey(KeyCode.LeftShift) && isRoll == false && rollDelay <= 0)
+        {
+            // play the roll animation
 
-                // Player is invisible for the duration of the roll
-                isRoll = true; 
-                rollTimer = 1.350f; 
-                invincibleTimer = 1.350f;
-                takingDamage = true;
+            // Player is invisible for the duration of the roll
+            isRoll = true; 
+            rollTimer = 0.3f; 
+            invincibleTimer = 0.3f;
+            takingDamage = true;
+            rollDelay = 2f;
                 
-                //direction of roll
-                // rolls right
-                if (transform.localScale.x > 0){
-                    rbody.velocity = new Vector2(5, rbody.velocity.y);
-                }
-                // rolls left
-                else if (transform.localScale.x < 0){
-                    rbody.velocity = new Vector2(-5, rbody.velocity.y);
-                }
+            //direction of roll
+            // rolls right
+            if (transform.localScale.x > 0){
+                rbody.velocity = new Vector2(10, rbody.velocity.y);
+            }
+            // rolls left
+            else if (transform.localScale.x < 0){
+                rbody.velocity = new Vector2(-10, rbody.velocity.y);
+            }
         }
         
         // If on a ladder and press W, go up
@@ -493,16 +536,22 @@ public class PlayerController : MonoBehaviour
             currentPassThroughBlock = null;
         }
 
-        fallTimer = 5f;
-        onGround = true;
+        if (transform.position.y - (coll.bounds.size.y / 2) >= collision.gameObject.transform.position.y + (collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
+        {
+            fallTimer = 5f;
+            onGround = true;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.tag == "passThroughBlock")
         {
-            fallTimer = 5f;
-            onGround = true;
+            if (transform.position.y - (coll.bounds.size.y / 2) >= collision.gameObject.transform.position.y + (collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
+            {
+                fallTimer = 5f;
+                onGround = true;
+            }
 
             if (collision.gameObject.CompareTag("MovingPlatform"))
             {
