@@ -10,6 +10,9 @@ public class HighscoreTimer : MonoBehaviour
     float gameTimer;
     string timerStr;
 
+    string minutes;
+    string seconds;
+
     TextMeshProUGUI tmpui;
 
     // used to help with formatting the time into min, seconds and miliseconds
@@ -33,8 +36,29 @@ public class HighscoreTimer : MonoBehaviour
             gameTimer += Time.deltaTime;
 
             timeSpan = TimeSpan.FromSeconds(gameTimer); 
-            timerStr = String.Format("Time: {0:00}:{1:00}.{2:0}", timeSpan.Minutes, timeSpan.Seconds, (timeSpan.Milliseconds).ToString()[0]);
 
+            if (timeSpan.Minutes < 10)
+            {
+                minutes = "0" + timeSpan.Minutes.ToString();
+            }
+
+            else
+            {
+                minutes = timeSpan.Minutes.ToString();
+            }
+
+            if (timeSpan.Seconds < 10)
+            {
+                seconds = "0" + timeSpan.Seconds.ToString();
+            }
+
+            else
+            {
+                seconds = timeSpan.Seconds.ToString();
+            }
+
+            timerStr = "Time: " + minutes + ":" + seconds;
+            
             tmpui.SetText(timerStr);
         }
        
