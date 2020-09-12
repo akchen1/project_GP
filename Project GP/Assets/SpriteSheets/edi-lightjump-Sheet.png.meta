@@ -1,0 +1,328 @@
+fileFormatVersion: 2
+guid: 1158052142cae6a4aa917936b3b92b93
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2911388970429941959
+    second: edi-lightjump-Sheet_0
+  - first:
+      213: -1236842176467345267
+    second: edi-lightjump-Sheet_1
+  - first:
+      213: -4990034744984731270
+    second: edi-lightjump-Sheet_2
+  - first:
+      213: -9137537753486786629
+    second: edi-lightjump-Sheet_3
+  - first:
+      213: -1248031676455217379
+    second: edi-lightjump-Sheet_4
+  - first:
+      213: -1268957014243960629
+    second: edi-lightjump-Sheet_5
+  - first:
+      213: -5379837605568619559
+    second: edi-lightjump-Sheet_6
+  - first:
+      213: 8617442085746165058
+    second: edi-lightjump-Sheet_7
+  - first:
+      213: -3294026605593927547
+    second: edi-lightjump-Sheet_8
+  - first:
+      213: 4990056744801311167
+    second: edi-lightjump-Sheet_9
+  - first:
+      213: 8657363098367963247
+    second: edi-lightjump-Sheet_10
+  - first:
+      213: -8781652327078711202
+    second: edi-lightjump-Sheet_11
+  - first:
+      213: 2989859073097185945
+    second: edi-lightjump-Sheet_12
+  - first:
+      213: 8964581484731418339
+    second: edi-lightjump-Sheet_13
+  - first:
+      213: -6005027611891148257
+    second: edi-lightjump-Sheet_14
+  - first:
+      213: -4974783059611165304
+    second: edi-lightjump-Sheet_15
+  - first:
+      213: 1921440641924948866
+    second: edi-lightjump-Sheet_16
+  - first:
+      213: 8898620518805945698
+    second: edi-lightjump-Sheet_0
+  - first:
+      213: 1947865445848330664
+    second: edi-lightjump-Sheet_1
+  - first:
+      213: -2303022884757454493
+    second: edi-lightjump-Sheet_2
+  - first:
+      213: 4467955629231277466
+    second: edi-lightjump-Sheet_3
+  - first:
+      213: 8977019836816837101
+    second: edi-lightjump-Sheet_4
+  - first:
+      213: 998064001672981967
+    second: edi-lightjump-Sheet_5
+  - first:
+      213: 3027892165809626230
+    second: edi-lightjump-Sheet_6
+  - first:
+      213: -7447340421446762399
+    second: edi-lightjump-Sheet_9
+  - first:
+      213: -6753159049838487828
+    second: edi-lightjump-Sheet_12
+  - first:
+      213: 5106724018329800491
+    second: edi-lightjump-Sheet_14
+  - first:
+      213: -6766800144766912661
+    second: edi-lightjump-Sheet_15
+  - first:
+      213: 6366834728180413223
+    second: edi-lightjump-Sheet_16
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Lumin
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: edi-lightjump-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 0
+        width: 175
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d806174f79ad5dee0800000000000000
+      internalID: -1236842176467345267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-lightjump-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 0
+        width: 102
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a71045876d5dfbab0800000000000000
+      internalID: -4990034744984731270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-lightjump-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 0
+        width: 102
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbff2b173d1f03180800000000000000
+      internalID: -9137537753486786629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

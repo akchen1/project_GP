@@ -16,6 +16,9 @@ public class EnemyScript : MonoBehaviour
     // LayerMask for the ground
     public LayerMask groundLayer;
 
+    public bool canShoot;
+    public Weapon weapon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,7 @@ public class EnemyScript : MonoBehaviour
         // Initialize stats
         health = 3;
         moneyValue = 5;
+
     }
 
     // Update is called once per frame
@@ -50,6 +54,11 @@ public class EnemyScript : MonoBehaviour
             {
                 rbody.velocity = new Vector2(hit.collider.GetComponent<Rigidbody2D>().velocity.x, 0);
             }
+        }
+
+        if (canShoot)
+        {
+            weapon.Shoot();
         }
     }
 

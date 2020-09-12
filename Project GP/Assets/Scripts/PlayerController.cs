@@ -57,9 +57,12 @@ public class PlayerController : MonoBehaviour
     private GameObject currentPassThroughBlock;
     private float doubleTapDownTimer = 0.5f;
     private int doubleTapDownCount = 0;
+    private bool aboutToTouchGround = false;
 
     // animation stuff
     private bool isFacingRight;
+    private float timeSinceLanding;
+    private Dictionary<string, float> animationTimes = new Dictionary<string, float>();
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
 
         anim = GetComponent<Animation>();
         animator = gameObject.GetComponent<Animator>();
+        getAnimationTimes();
+        timeSinceLanding = animationTimes["Playerland"];
         invincibleTimer = 0f;
         rollDelay = 0f;
 
@@ -275,6 +280,7 @@ public class PlayerController : MonoBehaviour
             if (doubleTapDownTimer > 0 && doubleTapDownCount == 1 && currentPassThroughBlock != null/*Number of Taps you want Minus One*/)
             {
                 currentPassThroughBlock.GetComponent<BoxCollider2D>().isTrigger = true;
+                onGround = false;
             }
             else
             {
@@ -328,7 +334,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Check if mouse key is pressed
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && weapon != null)
         {
             // Fire bullet
             if (weapon.Shoot())
@@ -371,6 +377,7 @@ public class PlayerController : MonoBehaviour
         animationStates();
     }
 
+
     // Function that sets the player back at the beginning with everything reset
     public void ResetPlayer()
     {
@@ -399,7 +406,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("hasGun", false);
         }
-        if (rbody.velocity.x < 0)
+        if (rbody.velocity.x < 0 && onGround)
         {
             animator.SetBool("isRunning", true);
             if (isFacingRight)
@@ -407,7 +414,7 @@ public class PlayerController : MonoBehaviour
                 flip();
             }
 
-        } else if (rbody.velocity.x > 0)
+        } else if (rbody.velocity.x > 0 && onGround)
         {
             animator.SetBool("isRunning", true);
             if (!isFacingRight)
@@ -417,6 +424,57 @@ public class PlayerController : MonoBehaviour
         } else
         {
             animator.SetBool("isRunning", false);
+        }
+
+        
+        if (!onGround)
+        {
+            if (rbody.velocity.y > 0 && !onLadder)
+            {
+                animator.SetBool("isJumping", true);
+                animator.SetBool("isFalling", false);
+                animator.SetBool("isLanding", false);
+            } else if (rbody.velocity.y <= 0 && !onLadder)
+            {
+                animator.SetBool("isJumping", false);
+                animator.SetBool("isFalling", true);
+                animator.SetBool("isLanding", false);
+            }
+        } else
+        {
+            if (animator.GetBool("isFalling"))
+            {
+                animator.SetBool("isLanding", true);
+                animator.SetBool("isFalling", false);
+            } else if (animator.GetBool("isLanding"))
+            {
+                if (animator.GetBool("isRunning") || animator.GetBool("isJumping"))
+                {
+                    timeSinceLanding = -1f;
+                }
+                timeSinceLanding -= Time.deltaTime;
+                if (timeSinceLanding < 0)
+                {
+                    animator.SetBool("isLanding", false);
+                    timeSinceLanding = animationTimes["Playerland"];
+                }
+            } else
+            {
+                timeSinceLanding = animationTimes["Playerland"];
+                animator.SetBool("isFalling", false);
+                animator.SetBool("isJumping", false);
+                animator.SetBool("isLanding", false);
+
+            }
+        }
+    }
+
+    private void getAnimationTimes()
+    {
+        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            animationTimes.Add(clip.name, clip.length);
         }
     }
 
@@ -439,8 +497,10 @@ public class PlayerController : MonoBehaviour
     // Check if player is going to land on a pass through block
     private bool isPassThroughBlock()
     {
-        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, coll.bounds.size.y / 2, 0), Vector2.down, 1, groundLayer);
-        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, -coll.bounds.size.y / 2, 0), Vector2.down, 1, groundLayer);
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, coll.bounds.size.y / 2, 0), Vector2.down, 0.5f, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, -coll.bounds.size.y / 2, 0), Vector2.down, 0.5f, groundLayer);
+        //Debug.DrawRay(transform.position - new Vector3(coll.bounds.size.x / 2, coll.bounds.size.y / 2, 0), new Vector3(0,-0.1f, 0), Color.green);
+        //Debug.DrawRay(transform.position + new Vector3(coll.bounds.size.x / 2, -coll.bounds.size.y / 2, 0), new Vector3(0, -0.1f, 0), Color.green);
         // If it collides with something that isn't NULL
         if (leftHit.collider != null)
         {
@@ -451,6 +511,14 @@ public class PlayerController : MonoBehaviour
             else
             {
                 currentPassThroughBlock = null;
+            }
+
+            if (leftHit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                aboutToTouchGround = true;
+            } else
+            {
+                aboutToTouchGround = false;
             }
             return true;
         }
@@ -465,11 +533,20 @@ public class PlayerController : MonoBehaviour
             {
                 currentPassThroughBlock = null;
             }
+            if (rightHit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                aboutToTouchGround = true;
+            } else
+            {
+                aboutToTouchGround = false;
+            }
             return true;
+
         }
         else
         {
             currentPassThroughBlock = null;
+            aboutToTouchGround = false;
         }
         return false;
     }
@@ -568,7 +645,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentPassThroughBlock = null;
             }
-        }        
+        } 
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
