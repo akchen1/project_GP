@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     // Position where the bullet appears from
     public Transform shotPoint;
 
-    // Number of bullets before needing to reload
+    // Number of bullets before needing to reload. Set to -1 for infinite bullets
     public int maxBullets;
     // Number of bullets left
     private int currentBullets;
@@ -31,26 +31,34 @@ public class Weapon : MonoBehaviour
     private bool canShoot;
     private bool isReload;
 
+    public GameObject gunOwner;
+
     // Start is called before the first frame update
     void Start()
     {
-        currentBullets = maxBullets;
+        currentBullets = maxBullets == -1 ? 1 : maxBullets;
         isReload = false;
+        gunOwner = this.transform.parent.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         // Check if shoot timer is above 0, meaning the player can't shoot
         shootTimer = shootTimer > 0f ? shootTimer - Time.deltaTime : 0f;
 
         // Check if reload timer is above 0, meaning player is reloading
         //reloadTimer = reloadTimer > 0f ? reloadTimer - Time.deltaTime : 0f;
 
+        
         // Weapon can shoot if number of bullets is greater than zero, it is not reloading, and it is not shooting
         canShoot = currentBullets > 0 && reloadTimer <= 0f && shootTimer == 0f ? true : false;
+        if (maxBullets == -1)
+        {
+            return;
+        }
 
-      
         // Check if reload timer is above 0, meaning player is reloading
         reloadTimer = reloadTimer > 0f ? reloadTimer - Time.deltaTime : 0f;
         
@@ -66,8 +74,20 @@ public class Weapon : MonoBehaviour
     {
         if (canShoot)
         {
-            Instantiate(bullet, shotPoint.position, Quaternion.identity);
-            currentBullets--;
+            GameObject b = Instantiate(bullet, shotPoint.position, Quaternion.identity);
+            if (gunOwner.tag == "Player")
+            {
+                b.GetComponent<BulletScript>().target = "Enemy";
+                currentBullets--;
+
+            }
+            else if (gunOwner.tag == "Enemy")
+            {
+                b.GetComponent<BulletScript>().target = "Player";
+                
+
+            }
+
             shootTimer = shootSpeed;
         }
         return canShoot;

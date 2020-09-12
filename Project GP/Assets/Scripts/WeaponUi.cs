@@ -16,7 +16,7 @@ public class WeaponUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Weapon weaponScript = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Weapon>();
+        Weapon weaponScript = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>();
         string reloading = weaponScript.getIsReload() ? "Reloading " : "";
         tmpui.SetText(reloading + weaponScript.getCurrentBullets().ToString() + "/" + weaponScript.maxBullets.ToString());
     }

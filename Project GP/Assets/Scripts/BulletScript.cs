@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+   
     // Rigidbody variable used to create constant horizontal movement
     Rigidbody2D rbody;
 
@@ -11,7 +12,12 @@ public class BulletScript : MonoBehaviour
     Vector3 shootDirection;
 
     // Speed of bullet
-    int bulletSpeed = 20;
+    public int bulletSpeed = 20;
+
+    // target tag
+    public string target;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +26,16 @@ public class BulletScript : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
 
         // Get direction
-        shootDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        shootDirection.z = 0;
+        if (target == "Enemy")
+        {
+            shootDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            shootDirection.z = 0;
+        } else if (target == "Player")
+        {
+            Transform playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
+            shootDirection = new Vector3(playerLocation.position.x, playerLocation.position.y, 0) - transform.position;
+        }
+
         shootDirection.Normalize();
 
         // Set velocity to shoot bullet
@@ -38,7 +52,7 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the tag of the object it collides with is "Ground"
-        if (collision.tag == "Ground" || collision.tag == "MovingPlatform")
+        if (collision.tag == "Ground" || collision.tag == "MovingPlatform" || collision.tag == "passThroughBlock")
         {
             // Destroy this specific instance of the bullet
             // Make sure to use this specific way of destroying instances of a prefab
@@ -47,13 +61,19 @@ public class BulletScript : MonoBehaviour
         }
 
         // Check if bullet hits enemy
-        else if (collision.tag == "Enemy")
+        else if (collision.tag == target)
         {
             // Access script of individual game object
-            EnemyScript enemyScript = collision.gameObject.GetComponent<EnemyScript>();
-
-            // Subtract health
-            enemyScript.health -= 1;
+            if (target == "Player")
+            {
+                PlayerController playerScript = collision.gameObject.GetComponent<PlayerController>();
+                playerScript.health -= 1;
+            } else if (target == "Enemy")
+            {
+                EnemyScript enemyScript = collision.gameObject.GetComponent<EnemyScript>();
+                // Subtract health
+                enemyScript.health -= 1;
+            }
 
             // Destroy this bullet
             Destroy(this.gameObject);
