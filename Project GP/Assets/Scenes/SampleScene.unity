@@ -124,6 +124,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &104553629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2891810393287021906, guid: 321a318bf63314647b8060e5509a0786,
+    type: 3}
+  m_PrefabInstance: {fileID: 7874116632639621656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &188449332
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &188449334
 MonoBehaviour:
@@ -176,7 +182,7 @@ MonoBehaviour:
   shop: {fileID: 356909760406523354, guid: e133e8bcd4ebefd48ad7299f98407870, type: 3}
   shopDoor: {fileID: 589116499015783930, guid: b0e92ccb7da304d43a6438b8731718e4, type: 3}
   numBlocks: 20
-  player: {fileID: 7874116632639621657}
+  player: {fileID: 104553629}
   enemy: {fileID: 8401405725320393597, guid: 6a018ed8b9551a54ea74912459083a69, type: 3}
 --- !u!1 &282287105
 GameObject:
@@ -616,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f42576bca183549458bf7bb4e88ac7a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7874116632639621657}
+  player: {fileID: 104553629}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2089,9 +2095,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 321a318bf63314647b8060e5509a0786, type: 3}
---- !u!1 &7874116632639621657 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1503500296065595786, guid: 321a318bf63314647b8060e5509a0786,
-    type: 3}
-  m_PrefabInstance: {fileID: 7874116632639621656}
-  m_PrefabAsset: {fileID: 0}
