@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("d") && !isRoll)
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(3, rbody.velocity.y);
+            rbody.velocity = new Vector2(5, rbody.velocity.y);
 
             // Look Right
             if (transform.localScale.x < 0)
@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKey("a") && !isRoll)
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(-3, rbody.velocity.y);
+            rbody.velocity = new Vector2(-5, rbody.velocity.y);
 
             // Look Left
             if (transform.localScale.x > 0)

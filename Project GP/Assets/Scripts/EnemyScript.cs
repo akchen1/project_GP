@@ -27,8 +27,8 @@ public class EnemyScript : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
 
         // Initialize stats
-        health = 3;
-        moneyValue = 5;
+        health = 7;
+        moneyValue = 50;
 
     }
 

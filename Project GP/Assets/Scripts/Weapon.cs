@@ -85,7 +85,6 @@ public class Weapon : MonoBehaviour
             {
                 b.GetComponent<BulletScript>().target = "Player";
                 
-
             }
 
             shootTimer = shootSpeed;
