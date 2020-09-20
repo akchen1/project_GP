@@ -52,7 +52,8 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the tag of the object it collides with is "Ground"
-        if (collision.tag == "Ground" || collision.tag == "MovingPlatform" || collision.tag == "passThroughBlock")
+        // Bullet will still go through "passThroughPlatforms" 
+        if (collision.tag == "Ground" || collision.tag == "MovingPlatform")
         {
             // Destroy this specific instance of the bullet
             // Make sure to use this specific way of destroying instances of a prefab
