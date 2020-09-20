@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
     public float shootSpeed;
     // Weapon recoil (knockback)
     public float recoil;
-
+    public int damage;
     // Variables to keep track of how fast the player can reload
     float reloadTimer;
     // Variables to keep track of how fast the player can shoot
