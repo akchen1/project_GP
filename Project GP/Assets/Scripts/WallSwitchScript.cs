@@ -43,10 +43,16 @@ public class WallSwitchScript : MonoBehaviour
     public void OpenDoor()
     {
         wall.SetActive(false);
+        AstarPath.active.Scan();
+        //AstarPath.active.UpdateGraphs(wall.GetComponent<BoxCollider2D>().bounds);
     }
 
     public void CloseDoor()
     {
         wall.SetActive(true);
+        AstarPath.active.Scan();
+
+        //AstarPath.active.UpdateGraphs(wall.GetComponent<BoxCollider2D>().bounds);
+
     }
 }

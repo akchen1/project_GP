@@ -22,9 +22,13 @@ public class PlayerController : MonoBehaviour
     // Get bullet gameobject
     // public GameObject bullet;
     public Weapon weapon;
+    public RobotPetControllerScript pet;
 
     // Player stats and current states
+
+    public int maxHealth;
     public int health;
+    public float moveSpeed { get; set; }
     Vector2 shootDirection;
     float invincibleTimer;
     bool takingDamage;
@@ -64,20 +68,25 @@ public class PlayerController : MonoBehaviour
     private float timeSinceLanding;
     private Dictionary<string, float> animationTimes = new Dictionary<string, float>();
 
+    public GameObject robotPet;
+
+
     // Start is called before the first frame update
     void Start()
     {
         // Find Rigidbody and Collider
         rbody = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
-
+        
         // Assign starting values to variables
         fallTimer = 5f;
         pos = transform.position;
-        health = 5;
+        maxHealth = 5;
+        health = maxHealth;
         onGround = false;
         onMovingPlatform = false;
         mPVel = 0f;
+        moveSpeed = 5;
 
         anim = GetComponent<Animation>();
         animator = gameObject.GetComponent<Animator>();
@@ -93,6 +102,7 @@ public class PlayerController : MonoBehaviour
         onLadder = false;
 
         isFacingRight = true;
+        robotPet.GetComponent<RobotPetControllerScript>().applyPassiveBuff();
     }
 
     // Function for the player to take damage
@@ -172,6 +182,8 @@ public class PlayerController : MonoBehaviour
                 {
                     GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
                     transform.position = destDoor.transform.position;
+                    pet.transform.position = destDoor.transform.position;
+                    //AstarPath.active.Scan();
                 }
                 
             }
@@ -226,27 +238,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("d") && !isRoll)
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(5, rbody.velocity.y);
-
-            // Look Right
-            if (transform.localScale.x < 0)
-            {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-            }
-            
+            rbody.velocity = new Vector2(moveSpeed, rbody.velocity.y);   
         }
-
         // Checks if the "a" key is being pressed
         else if (Input.GetKey("a") && !isRoll)
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(-5, rbody.velocity.y);
-
-            // Look Left
-            if (transform.localScale.x > 0)
-            {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-            }
+            rbody.velocity = new Vector2(-(moveSpeed), rbody.velocity.y);
         }
 
         // This else statement is to set the player's x-axis velocity to 0 if neither "a" nor "d" are being pressed.
@@ -375,8 +373,9 @@ public class PlayerController : MonoBehaviour
         }
 
         animationStates();
+        
+        
     }
-
 
     // Function that sets the player back at the beginning with everything reset
     public void ResetPlayer()
@@ -487,6 +486,11 @@ public class PlayerController : MonoBehaviour
         transform.localScale = theScale;
 
 
+    }
+
+    public bool getIsFacingRight()
+    {
+        return isFacingRight;
     }
 
     public GameObject getCurrentPassThroughBlock()

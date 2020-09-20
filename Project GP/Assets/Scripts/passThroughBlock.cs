@@ -20,6 +20,8 @@ public class passThroughBlock : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         effector = GetComponent<PlatformEffector2D>();
         blockColl = this.gameObject.GetComponent<Collider2D>();
+
+        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.FindGameObjectWithTag("RobotPet").GetComponent<BoxCollider2D>(), true);
     }
 
     // Update is called once per frame
