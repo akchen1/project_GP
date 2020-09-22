@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
 
     // Player stats and current states
 
-    public int maxHealth;
+    public HealthBar healthbar;
+    public int maxHealth = 100;
     public int health;
     public float moveSpeed { get; set; }
     Vector2 shootDirection;
@@ -83,6 +84,7 @@ public class PlayerController : MonoBehaviour
         pos = transform.position;
         maxHealth = 5;
         health = maxHealth;
+        healthbar.SetMaxHealth(maxHealth);
         onGround = false;
         onMovingPlatform = false;
         mPVel = 0f;
@@ -103,6 +105,9 @@ public class PlayerController : MonoBehaviour
 
         isFacingRight = true;
         robotPet.GetComponent<RobotPetControllerScript>().applyPassiveBuff();
+
+
+        
     }
 
     // Function for the player to take damage
@@ -115,6 +120,7 @@ public class PlayerController : MonoBehaviour
         {
             // Take damage and play hit animation
             health -= damage;
+            healthbar.SetHealth(health);
             anim.Play();
             takingDamage = true;
             invincibleTimer = anim.clip.length;
@@ -562,6 +568,7 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Collectible")
         {
             health++;
+            healthbar.SetHealth(health);
             Destroy(collision.gameObject);
         }
 
@@ -661,4 +668,5 @@ public class PlayerController : MonoBehaviour
         } 
         
     }
+
 }
