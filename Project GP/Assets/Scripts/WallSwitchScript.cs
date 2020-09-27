@@ -8,16 +8,17 @@ public class WallSwitchScript : MonoBehaviour
     public bool state;
     public GameObject wall;
 
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+   
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,15 +43,18 @@ public class WallSwitchScript : MonoBehaviour
 
     public void OpenDoor()
     {
-        wall.SetActive(false);
-        AstarPath.active.Scan();
+        //animaton.GetClip("wallSwitch");\
+        animator.SetTrigger("activate");
+        wall.GetComponent<LabDoorScript>().open = true;
+        //wall.SetActive(false);
+        //AstarPath.active.Scan();
         //AstarPath.active.UpdateGraphs(wall.GetComponent<BoxCollider2D>().bounds);
     }
 
     public void CloseDoor()
     {
         wall.SetActive(true);
-        AstarPath.active.Scan();
+        //AstarPath.active.Scan();
 
         //AstarPath.active.UpdateGraphs(wall.GetComponent<BoxCollider2D>().bounds);
 
