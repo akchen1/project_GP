@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ScriptableObjects;
+using Pathfinding;
 
 public class RobotPetControllerScript : MonoBehaviour
 {   
@@ -9,11 +10,14 @@ public class RobotPetControllerScript : MonoBehaviour
 
     public buffs buffSelector;
     public BuffableEntity playerBuffs;
+    AIPath path;
+    bool isFacingRight;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        isFacingRight = true;
+        path = GetComponent<AIPath>();
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>(), true);
     }
 
@@ -21,8 +25,24 @@ public class RobotPetControllerScript : MonoBehaviour
     void Update()
     {
 
+        if (path.desiredVelocity.x > 0.01f && !isFacingRight)
+        {
+            flip();
+        } else if (path.desiredVelocity.x < 0.01f && isFacingRight)
+        {
+            flip();
+        }
     }
+    private void flip()
+    {
 
+        isFacingRight = !isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+
+
+    }
     public void applyPassiveBuff()
     {
         if (buffSelector == buffs.speedBuff)
