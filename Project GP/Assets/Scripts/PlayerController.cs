@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     // animation stuff
     private bool isFacingRight;
     private float timeSinceLanding;
+    private float timeSinceInteract;
     private Dictionary<string, float> animationTimes = new Dictionary<string, float>();
 
     public GameObject robotPet;
@@ -124,6 +125,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         // Check if animation is currently playing so player is invincible
         if (takingDamage == true)
         {
@@ -183,7 +185,7 @@ public class PlayerController : MonoBehaviour
                     GameObject destDoor = GameObject.FindGameObjectWithTag("TeleportDoor");
                     transform.position = destDoor.transform.position;
                     pet.transform.position = destDoor.transform.position;
-                    //AstarPath.active.Scan();
+                    AstarPath.active.Scan();
                 }
                 
             }
@@ -212,6 +214,7 @@ public class PlayerController : MonoBehaviour
                 {
                     wsScript.state = false;
                     wsScript.OpenDoor();
+                    animator.SetBool("isInteracting", true);
                 }
                 else
                 {
@@ -373,8 +376,7 @@ public class PlayerController : MonoBehaviour
         }
 
         animationStates();
-        
-        
+
     }
 
     // Function that sets the player back at the beginning with everything reset
@@ -397,6 +399,22 @@ public class PlayerController : MonoBehaviour
 
     private void animationStates()
     {
+        if (animator.GetBool("isInteracting"))
+        {
+            timeSinceInteract -= Time.deltaTime;
+            if (timeSinceInteract < 0)
+            {
+                animator.SetBool("isInteracting", false);
+                timeSinceInteract = animationTimes["PlayerInteract"];
+            }
+
+        }
+        else
+        {
+            timeSinceInteract = animationTimes["PlayerInteract"];
+
+        }
+
         if (weapon != null)
         {
             animator.SetBool("hasGun", true);
@@ -452,11 +470,13 @@ public class PlayerController : MonoBehaviour
                     timeSinceLanding = -1f;
                 }
                 timeSinceLanding -= Time.deltaTime;
+                
                 if (timeSinceLanding < 0)
                 {
                     animator.SetBool("isLanding", false);
                     timeSinceLanding = animationTimes["Playerland"];
                 }
+                
             } else
             {
                 timeSinceLanding = animationTimes["Playerland"];

@@ -29,7 +29,7 @@ public class CameraScript : MonoBehaviour
         pos.z += distance;
 
         // Change camera position to pos
-        transform.position = pos + new Vector3(0, 4, 0);
+        transform.position = pos + new Vector3(0, 2, 0);
         
     }
 }
