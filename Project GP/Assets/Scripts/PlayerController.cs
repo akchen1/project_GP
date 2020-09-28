@@ -423,27 +423,38 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("hasGun", false);
         }
-        if (rbody.velocity.x < 0 && onGround)
+
+        if (rbody.velocity.x < 0)
         {
-            animator.SetBool("isRunning", true);
             if (isFacingRight)
             {
                 flip();
             }
-
-        } else if (rbody.velocity.x > 0 && onGround)
+        } else if (rbody.velocity.x > 0)
         {
-            animator.SetBool("isRunning", true);
             if (!isFacingRight)
             {
                 flip();
             }
+        }
+        
+        if (onGround)
+        {
+            if (rbody.velocity.x != 0)
+            {
+                animator.SetBool("isRunning", true);
+
+            } else
+            {
+                animator.SetBool("isRunning", false);
+
+            }
         } else
         {
             animator.SetBool("isRunning", false);
+
         }
 
-        
         if (!onGround)
         {
             if (rbody.velocity.y > 0 && !onLadder)

@@ -28,5 +28,6 @@ public class LabDoorScript : MonoBehaviour
             open = false;
         }
     }
+
    
 }
