@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("space") && onGround)
         {
             // Retain current x-axis velocity, while adding a bit of y-axis velocity
-            rbody.velocity = new Vector2(rbody.velocity.x, 7f);
+            rbody.velocity = new Vector2(rbody.velocity.x, 6f);
         }
 
         isPassThroughBlock();
