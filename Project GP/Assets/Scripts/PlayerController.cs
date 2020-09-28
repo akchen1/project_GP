@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     float mPVel;
     float rollDelay;
 
+    bool isCrouching;
+
 
     // Check if on ladder
     bool onLadder;
@@ -161,6 +163,19 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
         }
 
+        // Check if crouch key is being pressed
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            isCrouching = true;
+
+        }
+
+        // Check if crouch key is no longer being pressed
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            isCrouching = false;
+        }
+
         // Check if interaction key is being pressed
         if (Input.GetKeyDown("f"))
         {
@@ -241,13 +256,27 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("d") && !isRoll)
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(moveSpeed, rbody.velocity.y);   
+            if (isCrouching)
+            {
+                rbody.velocity = new Vector3(moveSpeed / 2, rbody.velocity.y);
+            }
+            else
+            {
+                rbody.velocity = new Vector2(moveSpeed, rbody.velocity.y);
+            }
         }
         // Checks if the "a" key is being pressed
         else if (Input.GetKey("a") && !isRoll)
         {
             // Changes the x-axis velocity of the player while retaining the y-axis velocity
-            rbody.velocity = new Vector2(-(moveSpeed), rbody.velocity.y);
+            if (isCrouching)
+            {
+                rbody.velocity = new Vector3(-(moveSpeed / 2), rbody.velocity.y);
+            }
+            else
+            {
+                rbody.velocity = new Vector2(-(moveSpeed), rbody.velocity.y);
+            }
         }
 
         // This else statement is to set the player's x-axis velocity to 0 if neither "a" nor "d" are being pressed.
