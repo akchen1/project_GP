@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     // Get access to the player's Rigidbody and Collider
     Rigidbody2D rbody;
-    Collider2D coll;
+    BoxCollider2D coll;
 
     // LayerMask for the ground
     public LayerMask groundLayer;
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         // Find Rigidbody and Collider
         rbody = GetComponent<Rigidbody2D>();
-        coll = GetComponent<Collider2D>();
+        coll = GetComponent<BoxCollider2D>();
         
         // Assign starting values to variables
         fallTimer = 5f;
@@ -167,7 +167,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCrouching = true;
-
         }
 
         // Check if crouch key is no longer being pressed
@@ -476,6 +475,15 @@ public class PlayerController : MonoBehaviour
             } else
             {
                 animator.SetBool("isRunning", false);
+
+                if (isCrouching)
+                {
+                    animator.SetBool("isCrouching", true);
+                }
+                else
+                {
+                    animator.SetBool("isCrouching", false);
+                }
 
             }
         } else
