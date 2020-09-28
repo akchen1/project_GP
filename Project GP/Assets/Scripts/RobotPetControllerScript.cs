@@ -12,13 +12,14 @@ public class RobotPetControllerScript : MonoBehaviour
     public BuffableEntity playerBuffs;
     AIPath path;
     bool isFacingRight;
-
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         isFacingRight = true;
         path = GetComponent<AIPath>();
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>(), true);
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,6 +32,16 @@ public class RobotPetControllerScript : MonoBehaviour
         } else if (path.desiredVelocity.x < 0.01f && isFacingRight)
         {
             flip();
+        }
+        
+        if (path.desiredVelocity.x != 0)
+        {
+            animator.SetBool("isMoving", true);
+
+        } else
+        {
+            animator.SetBool("isMoving", false);
+
         }
     }
     private void flip()
