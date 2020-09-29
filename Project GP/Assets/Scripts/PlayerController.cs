@@ -72,6 +72,11 @@ public class PlayerController : MonoBehaviour
     private Dictionary<string, float> animationTimes = new Dictionary<string, float>();
 
     public GameObject robotPet;
+    float collSizeY;
+    float collOffY;
+
+    bool isCrouchUp;
+    float crouchUpTimer;
 
 
     // Start is called before the first frame update
@@ -103,6 +108,10 @@ public class PlayerController : MonoBehaviour
         touchWallSwitch = false;
         touchPuzzleSwitch = false;
         onLadder = false;
+        isCrouchUp = false;
+
+        collSizeY = coll.size.y;
+        collOffY = coll.offset.y;
 
         isFacingRight = true;
         robotPet.GetComponent<RobotPetControllerScript>().applyPassiveBuff();
@@ -127,6 +136,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isCrouchUp)
+        {
+            crouchUpTimer -= Time.deltaTime;
+
+            if (crouchUpTimer <= 0)
+            {
+                isCrouchUp = false;
+                isCrouching = false;
+            }
+        }
         
         // Check if animation is currently playing so player is invincible
         if (takingDamage == true)
@@ -167,12 +186,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCrouching = true;
+
+            SpriteRenderer s = GetComponent<SpriteRenderer>();
+            coll.offset = new Vector2(coll.offset.x, (collOffY - (collSizeY / 4f)) * 0.8f);
+            coll.size = new Vector2(coll.bounds.size.x, (collSizeY / 2f) * 1.2f);
         }
 
         // Check if crouch key is no longer being pressed
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            isCrouching = false;
+            isCrouchUp = true;
+            crouchUpTimer = 0.167f;
+
+            SpriteRenderer s = GetComponent<SpriteRenderer>();
+            coll.offset = new Vector2(coll.offset.x, collOffY);
+            coll.size = new Vector2(coll.bounds.size.x, collSizeY);
+
         }
 
         // Check if interaction key is being pressed
@@ -476,16 +505,25 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetBool("isRunning", false);
 
-                if (isCrouching)
-                {
-                    animator.SetBool("isCrouching", true);
-                }
-                else
-                {
-                    animator.SetBool("isCrouching", false);
-                }
-
             }
+
+            if (isCrouchUp)
+            {
+                animator.SetBool("isCrouchUp", true);
+            }
+            else
+            {
+                animator.SetBool("isCrouchUp", false);
+            }
+            if (isCrouching)
+            {
+                animator.SetBool("isCrouching", true);
+            }
+            else
+            {
+                animator.SetBool("isCrouching", false);
+            }
+
         } else
         {
             animator.SetBool("isRunning", false);
