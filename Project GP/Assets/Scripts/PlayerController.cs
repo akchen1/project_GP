@@ -259,11 +259,6 @@ public class PlayerController : MonoBehaviour
                     wsScript.OpenDoor();
                     animator.SetBool("isInteracting", true);
                 }
-                else
-                {
-                    wsScript.state = true;
-                    wsScript.CloseDoor();
-                }
             }
 
             else if (touchPuzzleSwitch)

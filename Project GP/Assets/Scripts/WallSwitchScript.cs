@@ -43,20 +43,12 @@ public class WallSwitchScript : MonoBehaviour
 
     public void OpenDoor()
     {
-        //animaton.GetClip("wallSwitch");\
         animator.SetTrigger("activate");
         wall.GetComponent<LabDoorScript>().open = true;
-        //wall.SetActive(false);
-        //AstarPath.active.Scan();
-        //AstarPath.active.UpdateGraphs(wall.GetComponent<BoxCollider2D>().bounds);
     }
 
     public void CloseDoor()
     {
-        wall.SetActive(true);
-        //AstarPath.active.Scan();
-
-        //AstarPath.active.UpdateGraphs(wall.GetComponent<BoxCollider2D>().bounds);
-
+        //wall.SetActive(true);
     }
 }
