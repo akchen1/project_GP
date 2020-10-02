@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
     bool isCrouchUp;
     float crouchUpTimer;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -136,6 +135,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check if crosshair is behind player
+        if (transform.position.x < Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+        {
+            if (!isFacingRight)
+            {
+                flip();
+                isFacingRight = true;
+            }            
+        }
+        else
+        {
+            if (isFacingRight)
+            {
+                flip();
+                isFacingRight = false;
+            }
+        }
+
         if (isCrouchUp)
         {
             crouchUpTimer -= Time.deltaTime;
