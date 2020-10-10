@@ -1,37 +1,31 @@
 fileFormatVersion: 2
-guid: d46987f5f134da141b8857369ea8513f
+guid: c411c0878986b744da6f8794131a851c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2801518883306647666
-    second: bot-move-Sheet_0
+      213: 330492038271279349
+    second: edi-knockback(skeleton)-Sheet_0
   - first:
-      213: -8031938505258497547
-    second: bot-move-Sheet_1
+      213: 2005707792119997748
+    second: edi-knockback(skeleton)-Sheet_1
   - first:
-      213: 5005711976926414580
-    second: bot-move-Sheet_2
+      213: 1469957354782481967
+    second: edi-knockback(skeleton)-Sheet_2
   - first:
-      213: 3963836770521273108
-    second: bot-move-Sheet_3
+      213: 4142019134688042458
+    second: edi-knockback(skeleton)-Sheet_3
   - first:
-      213: -7682479009286736871
-    second: bot-move-Sheet_4
+      213: -4361966915531036672
+    second: edi-knockback(skeleton)-Sheet_4
   - first:
-      213: -5222279728553764371
-    second: bot-move-Sheet_5
+      213: -8639794107696073083
+    second: edi-knockback(skeleton)-Sheet_5
   - first:
-      213: -5097574027454591878
-    second: bot-move-Sheet_6
+      213: -3831263460552900496
+    second: edi-knockback(skeleton)-Sheet_6
   - first:
-      213: 604431962059664922
-    second: bot-move-Sheet_7
-  - first:
-      213: -8296236144550147050
-    second: bot-move-Sheet_8
-  - first:
-      213: -6798910752885914277
-    second: bot-move-Sheet_9
+      213: 916660042723743323
+    second: edi-knockback(skeleton)-Sheet_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -191,85 +185,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bot-move-Sheet_3
+      name: edi-knockback(skeleton)-Sheet_2
       rect:
         serializedVersion: 2
-        x: 462
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 330
+        y: 6
+        width: 84
+        height: 174
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4135d8e9a80620730800000000000000
-      internalID: 3963836770521273108
+      spriteID: f2e58ce0d66566410800000000000000
+      internalID: 1469957354782481967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_4
+      name: edi-knockback(skeleton)-Sheet_3
       rect:
         serializedVersion: 2
-        x: 606
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 914b1196b0a526590800000000000000
-      internalID: -7682479009286736871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bot-move-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 750
-        y: 18
+        x: 486
+        y: 0
         width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 174
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de954d5714cb687b0800000000000000
-      internalID: -5222279728553764371
+      spriteID: add93f725786b7930800000000000000
+      internalID: 4142019134688042458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_6
+      name: edi-knockback(skeleton)-Sheet_5
       rect:
         serializedVersion: 2
-        x: 894
-        y: 18
+        x: 48
+        y: 0
         width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 192
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7ccf4d1e67c149b0800000000000000
-      internalID: -5097574027454591878
+      spriteID: 586334ed809491880800000000000000
+      internalID: -8639794107696073083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-knockback(skeleton)-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 6
+        width: 84
+        height: 173
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0708fc87e2e94dac0800000000000000
+      internalID: -3831263460552900496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-knockback(skeleton)-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 0
+        width: 66
+        height: 186
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b56d752c371a8bc00800000000000000
+      internalID: 916660042723743323
       vertices: []
       indices: 
       edges: []

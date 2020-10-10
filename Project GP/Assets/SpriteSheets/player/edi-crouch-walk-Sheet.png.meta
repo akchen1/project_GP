@@ -1,37 +1,25 @@
 fileFormatVersion: 2
-guid: d46987f5f134da141b8857369ea8513f
+guid: edd46aa7961643048828523dc72905ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2801518883306647666
-    second: bot-move-Sheet_0
+      213: -3571222544489499120
+    second: edi-crouch-walk-Sheet_0
   - first:
-      213: -8031938505258497547
-    second: bot-move-Sheet_1
+      213: 3221961861501186406
+    second: edi-crouch-walk-Sheet_1
   - first:
-      213: 5005711976926414580
-    second: bot-move-Sheet_2
+      213: 4152306936499071241
+    second: edi-crouch-walk-Sheet_2
   - first:
-      213: 3963836770521273108
-    second: bot-move-Sheet_3
+      213: 792493011748896924
+    second: edi-crouch-walk-Sheet_3
   - first:
-      213: -7682479009286736871
-    second: bot-move-Sheet_4
+      213: -4260269859098332543
+    second: edi-crouch-walk-Sheet_4
   - first:
-      213: -5222279728553764371
-    second: bot-move-Sheet_5
-  - first:
-      213: -5097574027454591878
-    second: bot-move-Sheet_6
-  - first:
-      213: 604431962059664922
-    second: bot-move-Sheet_7
-  - first:
-      213: -8296236144550147050
-    second: bot-move-Sheet_8
-  - first:
-      213: -6798910752885914277
-    second: bot-move-Sheet_9
+      213: -8391259064956034807
+    second: edi-crouch-walk-Sheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -191,85 +179,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bot-move-Sheet_3
+      name: edi-crouch-walk-Sheet_0
       rect:
         serializedVersion: 2
-        x: 462
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 6
+        y: 0
+        width: 78
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4135d8e9a80620730800000000000000
-      internalID: 3963836770521273108
+      spriteID: 01636d55408707ec0800000000000000
+      internalID: -3571222544489499120
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_4
+      name: edi-crouch-walk-Sheet_1
       rect:
         serializedVersion: 2
-        x: 606
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 102
+        y: 0
+        width: 78
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 914b1196b0a526590800000000000000
-      internalID: -7682479009286736871
+      spriteID: 66172aa0e35b6bc20800000000000000
+      internalID: 3221961861501186406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_5
+      name: edi-crouch-walk-Sheet_2
       rect:
         serializedVersion: 2
-        x: 750
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 198
+        y: 0
+        width: 78
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de954d5714cb687b0800000000000000
-      internalID: -5222279728553764371
+      spriteID: 909ea6ca825ff9930800000000000000
+      internalID: 4152306936499071241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_6
+      name: edi-crouch-walk-Sheet_3
       rect:
         serializedVersion: 2
-        x: 894
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 294
+        y: 0
+        width: 84
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7ccf4d1e67c149b0800000000000000
-      internalID: -5097574027454591878
+      spriteID: c90c54402308ffa00800000000000000
+      internalID: 792493011748896924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-crouch-walk-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 78
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 182f321922b70e4c0800000000000000
+      internalID: -4260269859098332543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: edi-crouch-walk-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 0
+        width: 78
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 901e407d6524c8b80800000000000000
+      internalID: -8391259064956034807
       vertices: []
       indices: 
       edges: []

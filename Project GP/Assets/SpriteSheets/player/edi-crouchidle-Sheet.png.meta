@@ -1,37 +1,13 @@
 fileFormatVersion: 2
-guid: d46987f5f134da141b8857369ea8513f
+guid: 434460bc463c8c04b964355bef93a661
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2801518883306647666
-    second: bot-move-Sheet_0
+      213: -4145230049500398627
+    second: edi-crouchidle-Sheet_0
   - first:
-      213: -8031938505258497547
-    second: bot-move-Sheet_1
-  - first:
-      213: 5005711976926414580
-    second: bot-move-Sheet_2
-  - first:
-      213: 3963836770521273108
-    second: bot-move-Sheet_3
-  - first:
-      213: -7682479009286736871
-    second: bot-move-Sheet_4
-  - first:
-      213: -5222279728553764371
-    second: bot-move-Sheet_5
-  - first:
-      213: -5097574027454591878
-    second: bot-move-Sheet_6
-  - first:
-      213: 604431962059664922
-    second: bot-move-Sheet_7
-  - first:
-      213: -8296236144550147050
-    second: bot-move-Sheet_8
-  - first:
-      213: -6798910752885914277
-    second: bot-move-Sheet_9
+      213: 9030795817753605173
+    second: edi-crouchidle-Sheet_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -191,85 +167,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bot-move-Sheet_3
+      name: edi-crouchidle-Sheet_0
       rect:
         serializedVersion: 2
-        x: 462
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 0
+        width: 84
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4135d8e9a80620730800000000000000
-      internalID: 3963836770521273108
+      spriteID: ddbf04b7b3f2976c0800000000000000
+      internalID: -4145230049500398627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_4
+      name: edi-crouchidle-Sheet_1
       rect:
         serializedVersion: 2
-        x: 606
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 90
+        y: 0
+        width: 84
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 914b1196b0a526590800000000000000
-      internalID: -7682479009286736871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bot-move-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 750
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de954d5714cb687b0800000000000000
-      internalID: -5222279728553764371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bot-move-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 894
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7ccf4d1e67c149b0800000000000000
-      internalID: -5097574027454591878
+      spriteID: 5347944f2f4d35d70800000000000000
+      internalID: 9030795817753605173
       vertices: []
       indices: 
       edges: []
