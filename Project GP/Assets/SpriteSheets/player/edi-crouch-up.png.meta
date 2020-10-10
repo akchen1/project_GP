@@ -1,37 +1,22 @@
 fileFormatVersion: 2
-guid: d46987f5f134da141b8857369ea8513f
+guid: 3259a9c312d2cad458cbfa208677b8c7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2801518883306647666
-    second: bot-move-Sheet_0
+      213: -3004862642771656228
+    second: edi-crouch-up_0
   - first:
-      213: -8031938505258497547
-    second: bot-move-Sheet_1
+      213: 5277731974097296913
+    second: edi-crouch-up_1
   - first:
-      213: 5005711976926414580
-    second: bot-move-Sheet_2
+      213: -5197253410556612427
+    second: edi-crouch-up_2
   - first:
-      213: 3963836770521273108
-    second: bot-move-Sheet_3
+      213: 4134937557208799495
+    second: edi-crouch-up_3
   - first:
-      213: -7682479009286736871
-    second: bot-move-Sheet_4
-  - first:
-      213: -5222279728553764371
-    second: bot-move-Sheet_5
-  - first:
-      213: -5097574027454591878
-    second: bot-move-Sheet_6
-  - first:
-      213: 604431962059664922
-    second: bot-move-Sheet_7
-  - first:
-      213: -8296236144550147050
-    second: bot-move-Sheet_8
-  - first:
-      213: -6798910752885914277
-    second: bot-move-Sheet_9
+      213: 5170240686812235656
+    second: edi-crouch-up_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -128,6 +113,18 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: tvOS
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -164,18 +161,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -191,85 +176,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bot-move-Sheet_3
+      name: edi-crouch-up_0
       rect:
         serializedVersion: 2
-        x: 462
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 22
+        y: 0
+        width: 78
+        height: 126
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4135d8e9a80620730800000000000000
-      internalID: 3963836770521273108
+      spriteID: cd101cac8559c46d0800000000000000
+      internalID: -3004862642771656228
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_4
+      name: edi-crouch-up_1
       rect:
         serializedVersion: 2
-        x: 606
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 142
+        y: 0
+        width: 78
+        height: 180
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 914b1196b0a526590800000000000000
-      internalID: -7682479009286736871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bot-move-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 750
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de954d5714cb687b0800000000000000
-      internalID: -5222279728553764371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bot-move-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 894
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7ccf4d1e67c149b0800000000000000
-      internalID: -5097574027454591878
+      spriteID: 11e5acf84454e3940800000000000000
+      internalID: 5277731974097296913
       vertices: []
       indices: 
       edges: []

@@ -1,37 +1,73 @@
 fileFormatVersion: 2
-guid: d46987f5f134da141b8857369ea8513f
+guid: ff51faaae85849244b734b49ad2f0cdc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2801518883306647666
-    second: bot-move-Sheet_0
+      213: 4257824583207206052
+    second: edi-standing-roll_0
   - first:
-      213: -8031938505258497547
-    second: bot-move-Sheet_1
+      213: -7647881574445039029
+    second: edi-standing-roll_1
   - first:
-      213: 5005711976926414580
-    second: bot-move-Sheet_2
+      213: 2804966310898253332
+    second: edi-standing-roll_2
   - first:
-      213: 3963836770521273108
-    second: bot-move-Sheet_3
+      213: -7067060216314008340
+    second: edi-standing-roll_3
   - first:
-      213: -7682479009286736871
-    second: bot-move-Sheet_4
+      213: 8195096746893895931
+    second: edi-standing-roll_4
   - first:
-      213: -5222279728553764371
-    second: bot-move-Sheet_5
+      213: -7099784647747239160
+    second: edi-standing-roll_5
   - first:
-      213: -5097574027454591878
-    second: bot-move-Sheet_6
+      213: -5404216216656007093
+    second: edi-standing-roll_6
   - first:
-      213: 604431962059664922
-    second: bot-move-Sheet_7
+      213: 2602339349357585234
+    second: edi-standing-roll_7
   - first:
-      213: -8296236144550147050
-    second: bot-move-Sheet_8
+      213: -1961078622881683754
+    second: edi-standing-roll_8
   - first:
-      213: -6798910752885914277
-    second: bot-move-Sheet_9
+      213: 476832364035019114
+    second: edi-standing-roll_9
+  - first:
+      213: -260692297821878560
+    second: edi-standing-roll_10
+  - first:
+      213: -418699390223144501
+    second: edi-standing-roll_11
+  - first:
+      213: 8656389255719833939
+    second: edi-standing-roll_12
+  - first:
+      213: -9152028477976851301
+    second: edi-standing-roll_13
+  - first:
+      213: -2451007875077605566
+    second: edi-standing-roll_14
+  - first:
+      213: 2581629088403239464
+    second: edi-standing-roll_15
+  - first:
+      213: -2027118021904505230
+    second: edi-standing-roll_16
+  - first:
+      213: -5253486970091510264
+    second: edi-standing-roll_17
+  - first:
+      213: 634088570881273362
+    second: edi-standing-roll_18
+  - first:
+      213: -4970043020283063283
+    second: edi-standing-roll_19
+  - first:
+      213: -8143683667513902990
+    second: edi-standing-roll_20
+  - first:
+      213: 6326549652478617372
+    second: edi-standing-roll_21
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -191,85 +227,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bot-move-Sheet_3
+      name: edi-standing-roll_1
       rect:
         serializedVersion: 2
-        x: 462
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 522
+        y: 0
+        width: 120
+        height: 156
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4135d8e9a80620730800000000000000
-      internalID: 3963836770521273108
+      spriteID: b42c2fe6a344dd590800000000000000
+      internalID: -7647881574445039029
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_4
+      name: edi-standing-roll_3
       rect:
         serializedVersion: 2
-        x: 606
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1038
+        y: 0
+        width: 240
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 914b1196b0a526590800000000000000
-      internalID: -7682479009286736871
+      spriteID: cecee481d22cced90800000000000000
+      internalID: -7067060216314008340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_5
+      name: edi-standing-roll_12
       rect:
         serializedVersion: 2
-        x: 750
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1554
+        y: 0
+        width: 270
+        height: 114
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de954d5714cb687b0800000000000000
-      internalID: -5222279728553764371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bot-move-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 894
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7ccf4d1e67c149b0800000000000000
-      internalID: -5097574027454591878
+      spriteID: 35150b02a2ca12870800000000000000
+      internalID: 8656389255719833939
       vertices: []
       indices: 
       edges: []

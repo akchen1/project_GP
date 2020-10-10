@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     bool takingDamage;
     bool isRoll;
     float rollTimer;
+    const float rollTime = 0.5f;
     bool onGround;
     bool onMovingPlatform;
     float mPVel;
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
     public bool touchPuzzleSwitch;
 
     private GameObject currentPassThroughBlock;
-    private float doubleTapDownTimer = 0.5f;
+    private float doubleTapDownTimer = 0.3f;
     private int doubleTapDownCount = 0;
     private bool aboutToTouchGround = false;
 
@@ -70,13 +71,17 @@ public class PlayerController : MonoBehaviour
     private float timeSinceLanding;
     private float timeSinceInteract;
     private Dictionary<string, float> animationTimes = new Dictionary<string, float>();
+    private AnimationClip standingRollClip;
 
     public GameObject robotPet;
     float collSizeY;
     float collOffY;
 
     bool isCrouchUp;
+    bool isCrouchDown;
     float crouchUpTimer;
+    float crouchDownTimer;
+    int toggleCrouch = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -152,17 +157,6 @@ public class PlayerController : MonoBehaviour
                 isFacingRight = false;
             }
         }
-
-        if (isCrouchUp)
-        {
-            crouchUpTimer -= Time.deltaTime;
-
-            if (crouchUpTimer <= 0)
-            {
-                isCrouchUp = false;
-                isCrouching = false;
-            }
-        }
         
         // Check if animation is currently playing so player is invincible
         if (takingDamage == true)
@@ -188,38 +182,20 @@ public class PlayerController : MonoBehaviour
             rollTimer -= Time.deltaTime;
 
             // change sprite to something else
-            gameObject.GetComponent<SpriteRenderer>().sprite = rollSprite;
+            //gameObject.GetComponent<SpriteRenderer>().sprite = rollSprite;
         }
 
         else
         {
             isRoll = false;
+            rollTimer = rollTime;
 
             //change sprite back to original
-            gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
+            //gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
         }
 
-        // Check if crouch key is being pressed
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            isCrouching = true;
-
-            SpriteRenderer s = GetComponent<SpriteRenderer>();
-            coll.offset = new Vector2(coll.offset.x, (collOffY - (collSizeY / 4f)) * 0.8f);
-            coll.size = new Vector2(coll.bounds.size.x, (collSizeY / 2f) * 1.2f);
-        }
-
-        // Check if crouch key is no longer being pressed
-        if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            isCrouchUp = true;
-            crouchUpTimer = 0.167f;
-
-            SpriteRenderer s = GetComponent<SpriteRenderer>();
-            coll.offset = new Vector2(coll.offset.x, collOffY);
-            coll.size = new Vector2(coll.bounds.size.x, collSizeY);
-
-        }
+        checkCrouch();
+        
 
         // Check if interaction key is being pressed
         if (Input.GetKeyDown("f"))
@@ -375,22 +351,27 @@ public class PlayerController : MonoBehaviour
 
             // Player is invisible for the duration of the roll
             isRoll = true; 
-            rollTimer = 0.3f; 
+            rollTimer = rollTime; 
             invincibleTimer = 0.3f;
             takingDamage = true;
             rollDelay = 2f;
-                
+
             //direction of roll
             // rolls right
-            if (transform.localScale.x > 0){
-                rbody.velocity = new Vector2(10, rbody.velocity.y);
+            if (transform.localScale.x > 0)
+            {
+                //rbody.AddForce(new Vector2(3, 0));
+                rbody.velocity = new Vector2(3, rbody.velocity.y);
             }
             // rolls left
-            else if (transform.localScale.x < 0){
-                rbody.velocity = new Vector2(-10, rbody.velocity.y);
+            else if (transform.localScale.x < 0)
+            {
+                //rbody.AddForce(new Vector2(-3, 0));
+
+                rbody.velocity = new Vector2(-3, rbody.velocity.y);
             }
         }
-        
+
         // If on a ladder and press W, go up
         if (Input.GetKey("w") && onLadder)
         {
@@ -448,6 +429,78 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void crouch(bool down)
+    {
+        if (down)   // crouching down
+        {
+            isCrouching = true;
+            isCrouchDown = true;
+            crouchDownTimer = animationTimes["PlayerCrouchDown"];
+            coll.offset = new Vector2(coll.offset.x, (collOffY - (collSizeY / 4f)) * 1.2f);
+            coll.size = new Vector2(coll.bounds.size.x, (collSizeY / 2f) * 1.2f);
+        } else { // crouching up
+            if (isCrouchDown) // if trying to crouch up while crouching down
+            {
+                isCrouchDown = false;
+                isCrouchUp = true;
+                isCrouching = true;
+            }
+            else // crouch up
+            {
+                isCrouchUp = true;
+                crouchUpTimer = animationTimes["PlayerCrouchUp"];
+                coll.offset = new Vector2(coll.offset.x, collOffY);
+                coll.size = new Vector2(coll.bounds.size.x, collSizeY);
+            }
+        }
+    }
+
+    private void checkCrouch()
+    {
+        if (Input.GetKeyDown(KeyCode.C)) // toggle crouch
+        {
+            if (toggleCrouch == -1) // toggle off
+            {
+                toggleCrouch = 1;
+            }
+            else if (toggleCrouch == 1)
+            {
+                toggleCrouch = 0;
+            }
+            else
+            {
+                toggleCrouch = -1;
+            }
+        }
+
+        // Check if crouch key is being pressed
+        if (Input.GetKeyDown(KeyCode.LeftControl) && toggleCrouch != 1) // if crouch is pressed and toggle crouch not currently active
+        {
+            crouch(true);
+        }
+        else if (toggleCrouch == 1 && !isCrouching) // if toggle crouch and not already crouching
+        {
+            crouch(true);
+        }
+
+        // Check if crouch key is no longer being pressed
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            if (toggleCrouch == -1) // if toggle crouch is not on
+            {
+                crouch(false);
+            }
+        }
+        else if (toggleCrouch == 0) // toggle crouch is on and currently crouched
+        {
+            if (toggleCrouch == 0)
+            {
+                toggleCrouch = -1;  // set toggle to none
+            }
+            crouch(false);
+        }
+    }
+
     // Function that sets the player back at the beginning with everything reset
     public void ResetPlayer()
     {
@@ -468,6 +521,7 @@ public class PlayerController : MonoBehaviour
 
     private void animationStates()
     {
+        // Player interaction
         if (animator.GetBool("isInteracting"))
         {
             timeSinceInteract -= Time.deltaTime;
@@ -484,6 +538,27 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        // Player rolling
+        if (isRoll && !animator.GetBool("isRolling"))
+        {
+            float t = animationTimes["player-standing-roll"] / rollTime;
+            animator.SetFloat("rollTime", t);
+            animator.SetBool("isRolling", true);
+        } else if (!isRoll)
+        {
+            
+            if (!isCrouching && animator.GetBool("isRolling"))
+            {
+                animator.SetBool("isRolling", false);
+                isCrouching = true;
+                crouch(false);
+            } else
+            {
+                animator.SetBool("isRolling", false);
+            }
+        }
+
+        // Weapon status
         if (weapon != null)
         {
             animator.SetBool("hasGun", true);
@@ -493,6 +568,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("hasGun", false);
         }
 
+        // Player direction
         if (rbody.velocity.x < 0)
         {
             if (isFacingRight)
@@ -506,8 +582,43 @@ public class PlayerController : MonoBehaviour
                 flip();
             }
         }
-        
-        if (onGround)
+
+        // crouching
+        if (onGround && isCrouching)
+        {
+            if (isCrouchDown)
+            {
+                animator.SetBool("isCrouchDown", true);
+                animator.SetBool("isCrouching", true);
+            }
+
+            if (isCrouchUp)
+            {
+                animator.SetBool("isCrouchUp", true);
+            }
+
+            if ((crouchDownTimer -= Time.deltaTime) < 0 && isCrouchDown)
+            {
+                animator.SetBool("isCrouchDown", false);
+                isCrouchDown = false;
+            } else if (!isCrouchDown)
+            {
+                animator.SetBool("isCrouchDown", false);
+            }
+
+            if ((crouchUpTimer -= Time.deltaTime) < 0 && isCrouchUp)
+            {
+                animator.SetBool("isCrouching", false);
+                animator.SetBool("isCrouchUp", false);
+                isCrouching = false;
+                isCrouchUp = false;
+            } 
+
+        }
+
+ 
+        // On ground actions
+        if (onGround && !isRoll)
         {
             if (rbody.velocity.x != 0)
             {
@@ -519,29 +630,13 @@ public class PlayerController : MonoBehaviour
 
             }
 
-            if (isCrouchUp)
-            {
-                animator.SetBool("isCrouchUp", true);
-            }
-            else
-            {
-                animator.SetBool("isCrouchUp", false);
-            }
-            if (isCrouching)
-            {
-                animator.SetBool("isCrouching", true);
-            }
-            else
-            {
-                animator.SetBool("isCrouching", false);
-            }
-
-        } else
+        } else 
         {
             animator.SetBool("isRunning", false);
 
         }
 
+        // In air actions
         if (!onGround)
         {
             if (rbody.velocity.y > 0 && !onLadder)
@@ -592,6 +687,10 @@ public class PlayerController : MonoBehaviour
         foreach (AnimationClip clip in clips)
         {
             animationTimes.Add(clip.name, clip.length);
+            if (clip.name == "player-standing-roll")
+            {
+                standingRollClip = clip;
+            }
         }
     }
 
@@ -619,10 +718,10 @@ public class PlayerController : MonoBehaviour
     // Check if player is going to land on a pass through block
     private bool isPassThroughBlock()
     {
-        RaycastHit2D leftHit = Physics2D.Raycast(transform.position - new Vector3(coll.bounds.size.x / 2, coll.bounds.size.y / 2, 0), Vector2.down, 0.5f, groundLayer);
-        RaycastHit2D rightHit = Physics2D.Raycast(transform.position + new Vector3(coll.bounds.size.x / 2, -coll.bounds.size.y / 2, 0), Vector2.down, 0.5f, groundLayer);
-        //Debug.DrawRay(transform.position - new Vector3(coll.bounds.size.x / 2, coll.bounds.size.y / 2, 0), new Vector3(0,-0.1f, 0), Color.green);
-        //Debug.DrawRay(transform.position + new Vector3(coll.bounds.size.x / 2, -coll.bounds.size.y / 2, 0), new Vector3(0, -0.1f, 0), Color.green);
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position, Vector2.down, 0.5f, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position, Vector2.down, 0.5f, groundLayer);
+        Debug.DrawRay(transform.position, new Vector3(0, -0.1f, 0), Color.green);
+        Debug.DrawRay(transform.position, new Vector3(0, -0.1f, 0), Color.green);
         // If it collides with something that isn't NULL
         if (leftHit.collider != null)
         {
@@ -734,8 +833,7 @@ public class PlayerController : MonoBehaviour
         {
             currentPassThroughBlock = null;
         }
-
-        if (transform.position.y - (coll.bounds.size.y / 2) >= collision.gameObject.transform.position.y + (collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
+        if (transform.position.y >= collision.gameObject.transform.position.y + (collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
         {
             fallTimer = 5f;
             onGround = true;
@@ -746,7 +844,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Finish") || collision.gameObject.CompareTag("MovingPlatform") || collision.gameObject.tag == "passThroughBlock")
         {
-            if (transform.position.y - (coll.bounds.size.y / 2) >= collision.gameObject.transform.position.y + (collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
+            if (transform.position.y >= collision.gameObject.transform.position.y + (collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
             {
                 fallTimer = 5f;
                 onGround = true;

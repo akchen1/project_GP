@@ -1,37 +1,58 @@
 fileFormatVersion: 2
-guid: d46987f5f134da141b8857369ea8513f
+guid: b73fddec806fa0e41a6290b0c0745477
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2801518883306647666
-    second: bot-move-Sheet_0
+      213: 2958407597516203172
+    second: edi-lightfall-Sheet_0
   - first:
-      213: -8031938505258497547
-    second: bot-move-Sheet_1
+      213: 7255539376862702278
+    second: edi-lightfall-Sheet_1
   - first:
-      213: 5005711976926414580
-    second: bot-move-Sheet_2
+      213: 5689784836827687894
+    second: edi-lightfall-Sheet_2
   - first:
-      213: 3963836770521273108
-    second: bot-move-Sheet_3
+      213: 7477626990270449590
+    second: edi-lightfall-Sheet_3
   - first:
-      213: -7682479009286736871
-    second: bot-move-Sheet_4
+      213: 7135563321873954935
+    second: edi-lightfall-Sheet_4
   - first:
-      213: -5222279728553764371
-    second: bot-move-Sheet_5
+      213: 9151386160119824691
+    second: edi-lightfall-Sheet_5
   - first:
-      213: -5097574027454591878
-    second: bot-move-Sheet_6
+      213: -7005817412556153947
+    second: edi-lightfall-Sheet_6
   - first:
-      213: 604431962059664922
-    second: bot-move-Sheet_7
+      213: -2080015243460401960
+    second: edi-lightfall-Sheet_7
   - first:
-      213: -8296236144550147050
-    second: bot-move-Sheet_8
+      213: 3818496388961541820
+    second: edi-lightfall-Sheet_8
   - first:
-      213: -6798910752885914277
-    second: bot-move-Sheet_9
+      213: 8084986060860720231
+    second: edi-lightfall-Sheet_9
+  - first:
+      213: 3461468343336070429
+    second: edi-lightfall-Sheet_10
+  - first:
+      213: -735755846933780813
+    second: edi-lightfall-Sheet_11
+  - first:
+      213: -1688147864775410429
+    second: edi-lightfall-Sheet_12
+  - first:
+      213: 4984902685535503749
+    second: edi-lightfall-Sheet_13
+  - first:
+      213: -8746675249460968922
+    second: edi-lightfall-Sheet_14
+  - first:
+      213: 3941970480155998707
+    second: edi-lightfall-Sheet_15
+  - first:
+      213: -5072178109267860832
+    second: edi-lightfall-Sheet_16
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -191,85 +212,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bot-move-Sheet_3
+      name: edi-lightfall-Sheet_4
       rect:
         serializedVersion: 2
-        x: 462
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 780
+        y: 0
+        width: 96
+        height: 192
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4135d8e9a80620730800000000000000
-      internalID: 3963836770521273108
+      spriteID: 7787a90190d960360800000000000000
+      internalID: 7135563321873954935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bot-move-Sheet_4
+      name: edi-lightfall-Sheet_5
       rect:
         serializedVersion: 2
-        x: 606
-        y: 18
-        width: 60
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 954
+        y: 0
+        width: 120
+        height: 192
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 914b1196b0a526590800000000000000
-      internalID: -7682479009286736871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bot-move-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 750
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de954d5714cb687b0800000000000000
-      internalID: -5222279728553764371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bot-move-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 894
-        y: 18
-        width: 66
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7ccf4d1e67c149b0800000000000000
-      internalID: -5097574027454591878
+      spriteID: 3314e5cf931400f70800000000000000
+      internalID: 9151386160119824691
       vertices: []
       indices: 
       edges: []
